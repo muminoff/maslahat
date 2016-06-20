@@ -3,4 +3,4 @@ Django
 gunicorn
 psycopg2
 whitenoise
-django-algolia
+algoliasearch-django
