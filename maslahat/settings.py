@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 import os
 import dj_database_url
-import urlparse
+from urllib.parse import urlparse
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
