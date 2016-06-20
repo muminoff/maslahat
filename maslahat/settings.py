@@ -37,7 +37,6 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.algoliasearch',
     'core'
 )
 
@@ -136,12 +135,6 @@ STATICFILES_DIRS = (
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
-
-ALGOLIA = {
-    'APPLICATION_ID': os.getenv('ALGOLIASEARCH_APPLICATION_ID'),
-    'API_KEY': os.getenv('ALGOLIASEARCH_API_KEY'),
-    'SEARCH_API_KEY': os.getenv('ALGOLIASEARCH_API_KEY_SEARCH'),
-}
 
 FACEBOOK_APP_ID = os.getenv("FACEBOOK_APP_ID", "1765073177112580")
 FACEBOOK_APP_SECRET = os.getenv("FACEBOOK_APP_SECRET", "02cd9eed57a406b18c24b2e9d11b4fc9")
