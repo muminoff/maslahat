@@ -10,8 +10,13 @@
                 <th>Пост матни</th>
                 <th>Муалллиф</th>
                 <th>Ёзилган вақти</th>
-                <th>Лайклар</th>
-                <th>Улашишлар</th>
+                <th>📢</th>
+                <th>👍</th>
+                <th>❤️</th>
+                <th>😵</th>
+                <th>😀</th>
+                <th>😢</th>
+                <th>😠</th>
             </tr>
         </thead>
         <tbody>
@@ -20,8 +25,13 @@
                 <td>{{ post.text|truncatechars:32 }}</td>
                 <td>{{ post.author }}</td>
                 <td>{{ post.published }}</td>
-                <td>{{ post.likes }}</td>
                 <td>{{ post.shares }}</td>
+                <td>{{ post.likes }}</td>
+                <td>{{ post.loves }}</td>
+                <td>{{ post.wows }}</td>
+                <td>{{ post.hahas }}</td>
+                <td>{{ post.sads }}</td>
+                <td>{{ post.angrys }}</td>
             </tr>
             {% endfor %}
     </table>
