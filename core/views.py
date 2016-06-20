@@ -9,7 +9,7 @@ from .models import Post
 # Create your views here.
 def index(request):
     context = {
-        'last_posts': Post.objects.order_by('-published').all()[:10]
+        'last_posts': Post.objects.order_by('-published').all()[:100]
     }
     return render(request, 'index.html', context)
 
