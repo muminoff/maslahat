@@ -11,6 +11,5 @@ import core.views
 
 urlpatterns = [
     url(r'^$', core.views.index, name='index'),
-    url(r'^search/', core.views.instant_search, name='instant_search'),
     # url(r'^admin/', include(admin.site.urls)),
 ]
