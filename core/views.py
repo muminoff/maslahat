@@ -15,7 +15,7 @@ def index(request):
 def instant_search(request):
     context = {
         'appID': settings.ALGOLIA['APPLICATION_ID'],
-        'searchKey': settings.ALGOLIA['SEARCH_API_KEY'],
+        'searchKey': settings.ALGOLIA['API_KEY'],
         'indexName': get_adapter(Post).index_name
     }
     return render(request, 'instant_search.html', context)
