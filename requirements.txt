@@ -3,4 +3,5 @@ Django
 gunicorn
 psycopg2
 whitenoise
+cryptography==1.2.3
 algoliasearch-django
