@@ -21,7 +21,7 @@
             </tr>
         </thead>
         <tbody>
-            {% cache 60 last_posts %}
+            {% cache 3600 last_posts %}
             {% for post in last_posts %}
             <tr>
                 <td>{{ post.text|truncatechars:32 }}</td>
