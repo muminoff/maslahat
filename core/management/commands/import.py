@@ -7,10 +7,16 @@ from django.conf import settings
 from core.models import Post
 
 # Misc
-import urllib2
+try:
+    import urllib.request as urllib2
+except ImportError:
+    import urllib2
 import json
 import datetime
 import time
+
+# Algolia
+from algoliasearch.helpers import AlgoliaException
 
 
 class Command(BaseCommand):
@@ -36,7 +42,7 @@ class Command(BaseCommand):
                 text = "Error for URL %s: %s" % (url, datetime.datetime.now())
                 self.stdout.write(self.style.ERROR(text))
 
-        return response.read()
+        return response.read().decode('utf-8')
 
     # Needed to write tricky unicode correctly to csv
     def unicode_normalize(self, text):
@@ -48,6 +54,7 @@ class Command(BaseCommand):
         fields = "/?fields=message,link,created_time,type,name,id,comments.limit(0).summary(true),shares,reactions.limit(0).summary(true),from"  # noqa
         parameters = "&limit=%s&access_token=%s" % (num_statuses, access_token)
         url = base + node + fields + parameters
+        # data = json.loads(self.request_until_succeed(url))
         data = json.loads(self.request_until_succeed(url))
         return data
 
@@ -120,7 +127,12 @@ class Command(BaseCommand):
                 post.hahas = resp_data[13]
                 post.sads = resp_data[14]
                 post.angrys = resp_data[15]
-                post.save()
+
+                try:
+                    post.save()
+                except AlgoliaException:
+                    pass
+
                 text = "%s post processed: %s" % (post.id, datetime.datetime.now())  # noqa
                 self.stdout.write(self.style.SUCCESS(text))
                 num_processed += 1
