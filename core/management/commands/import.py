@@ -125,7 +125,7 @@ class Command(BaseCommand):
         self.stdout.write(self.style.NOTICE(text))
         
         statuses = self.getFacebookPageFeedData(group_id, access_token, 100)
-        
+
         while has_next_page:
             for status in statuses['data']:
                 resp_data = self.processFacebookPageFeedStatus(status, access_token)
