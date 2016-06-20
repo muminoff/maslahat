@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.algoliasearch',
     'core'
 )
 
@@ -136,3 +137,10 @@ STATICFILES_DIRS = (
 # https://warehouse.python.org/project/whitenoise/
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
+ALGOLIA = {
+    'APPLICATION_ID': os.getenv('ALGOLIA_APPLICATION_ID'),
+    'API_KEY': os.getenv('ALGOLIA_API_KEY'),
+    'SEARCH_API_KEY': os.getenv('ALGOLIA_SEARCH_API_KEY'),
+    'INDEX_PREFIX': 'maslahat',
+    'INDEX_SUFFIX': 'dev'
+}
