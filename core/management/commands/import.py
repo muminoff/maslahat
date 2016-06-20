@@ -3,7 +3,7 @@ from django.core.management.base import BaseCommand
 from django.utils.dateparse import parse_datetime
 from django.conf import settings
 
-# Incogwas
+# Core
 from core.models import Post
 
 # Misc
@@ -14,9 +14,6 @@ except ImportError:
 import json
 import datetime
 import time
-
-# Algolia
-from algoliasearch.helpers import AlgoliaException
 
 
 class Command(BaseCommand):
