@@ -112,27 +112,28 @@ class Command(BaseCommand):
                 try:
                     Post.objects.update_or_create(
                         id=resp_data[0],
-                        text=resp_data[1],
-                        author=resp_data[2],
-                        type=resp_data[4],
-                        link=resp_data[5],
-                        published=parse_datetime(resp_data[6]),
-                        reactions=resp_data[7],
-                        comments=resp_data[8],
-                        shares=resp_data[9],
-                        likes=resp_data[10],
-                        loves=resp_data[11],
-                        wows=resp_data[12],
-                        hahas=resp_data[13],
-                        sads=resp_data[14],
-                        angrys=resp_data[15])
+                        defaults={
+                            'text': resp_data[1],
+                            'author': resp_data[2],
+                            'type': resp_data[4],
+                            'link': resp_data[5],
+                            'published': parse_datetime(resp_data[6]),
+                            'reactions': resp_data[7],
+                            'comments': resp_data[8],
+                            'shares': resp_data[9],
+                            'likes': resp_data[10],
+                            'loves': resp_data[11],
+                            'wows': resp_data[12],
+                            'hahas': resp_data[13],
+                            'sads': resp_data[14],
+                            'angrys': resp_data[15]
+                        })
 
                 except AlgoliaException as e:
-                    print(str(e))
-                    # text = "Cannot index post %s: %s" % (
-                    #         resp_data[0], datetime.datetime.now())
-                    # self.stdout.write(self.style.ERROR(text))
-                    pass
+                    self.stdout.write(self.style.ERROR(str(e))
+                    text = "Cannot index post %s: %s" % (
+                            resp_data[0], datetime.datetime.now())
+                    self.stdout.write(self.style.ERROR(text))
 
                 text = "%s post processed: %s" % (resp_data[0], datetime.datetime.now())  # noqa
                 self.stdout.write(self.style.SUCCESS(text))
