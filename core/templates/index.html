@@ -1,9 +1,42 @@
 {% extends "base.html" %}
 {% load staticfiles %}
+{% load cache %}
 
 {% block content %}
 
 <div class="container">
-  Maslahat
+    <table class="table table-hover table-condensed">
+        <thead>
+            <tr>
+                <th>Пост матни</th>
+                <th>Муалллиф</th>
+                <th>Ёзилган вақти</th>
+                <th>📢</th>
+                <th>👍</th>
+                <th>❤️</th>
+                <th>😵</th>
+                <th>😀</th>
+                <th>😢</th>
+                <th>😠</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% cache 3600 last_posts %}
+            {% for post in last_posts %}
+            <tr>
+                <td>{{ post.text|truncatechars:32 }}</td>
+                <td>{{ post.author }}</td>
+                <td>{{ post.published }}</td>
+                <td>{{ post.shares }}</td>
+                <td>{{ post.likes }}</td>
+                <td>{{ post.loves }}</td>
+                <td>{{ post.wows }}</td>
+                <td>{{ post.hahas }}</td>
+                <td>{{ post.sads }}</td>
+                <td>{{ post.angrys }}</td>
+            </tr>
+            {% endfor %}
+            {% endcache %}
+    </table>
 </div>
 {% endblock %}
