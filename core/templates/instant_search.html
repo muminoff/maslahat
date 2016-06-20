@@ -1,0 +1,110 @@
+{% extends "_base.html" %}
+{% load static %}
+
+{% block title %}Instant-search{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-sm-12">
+    <p class="lead">Қидирув хизмати</p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-6 col-sm-offset-3">
+    <input id="q" name="q" placeholder="Қидириш" autocomplete="off" autocorrect="false" spellcheck="false" class="form-control" type="search" />
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12" id="hits-stat">
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <div id="no-hits" class="col-sm-12 hidden"></div>
+
+    <table id="hits-table" class="table table-striped hidden">
+      <thead>
+        <tr>
+          <th style="width: 30%;">Пост матни</th>
+          <th style="witdh: 35%;">Пост муаллифи</th>
+          <th style="width: 35%;">Лайклар сони</th>
+        </tr>
+      </thead>
+      <tbody id="hits">
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script src="//cdn.jsdelivr.net/hogan.js/3.0.2/hogan.min.js"></script>
+
+{% verbatim %}
+<script type="text/template" id="hit-template">
+<tr>
+  <td>{{{ _highlightResult.text.value }}}</td>
+  <td>{{{ _highlightResult.author.value }}}</td>
+  <td>{{{ _highlightResult.likes.value }}}</td>
+</tr>
+</script>
+{% endverbatim %}
+
+<script>
+$(document).ready(function() {
+  var $inputField = $('#q');
+  var $hits = $('#hits');
+  var $hitsTable = $('#hits-table');
+  var $noHits = $('#no-hits');
+  var $hitsStat = $('#hits-stat');
+
+  var hitTemplate = Hogan.compile($('#hit-template').text());
+
+  var client = algoliasearch('{{ appID }}', '{{ searchKey }}');
+  var helper = algoliasearchHelper(client, '{{ indexName }}');
+
+  $('.search-terms a').click(function(e) {
+    $inputField.val($(this).text()).change().focus();
+    $inputField.keyup();
+  });
+
+  $inputField.on('keyup', function() {
+    var query = $inputField.val();
+    helper.setQuery(query).search();
+  }).focus();
+
+  helper.on('result', function(data) {
+    renderHits(data);
+  });
+
+  helper.search(); // first search
+
+  function renderHits(content) {
+    var hitsHtml = '';
+
+    if (content.hits.length === 0) {
+      hitsHtml = '<p class="text-center text-danger lead">We didn\'t find any results for your search.</p>';
+      $noHits.html(hitsHtml);
+      $noHits.removeClass('hidden');
+      $hitsTable.addClass('hidden');
+    } else {
+      for (var i = 0; i < content.hits.length; ++i) {
+        hitsHtml += hitTemplate.render(content.hits[i]);
+      }
+
+      $hits.html(hitsHtml);
+      $hitsTable.removeClass('hidden');
+      $noHits.addClass('hidden');
+    }
+
+    $hitsStat.html('<p class="text-right">Found <b>' +
+        content.nbHits + '</b> results in <b>' + content.processingTimeMS + '</b>ms, ' +
+        'by <a href="http://www.algolia.com"><img src="{% static "img/logo-algolia.png" %}" /></a></p>'
+    );
+  }
+});
+</script>
+{% endblock %}

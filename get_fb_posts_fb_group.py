@@ -130,7 +130,8 @@ def scrapeFacebookPageFeedStatus(group_id, access_token):
         
         while has_next_page:
             for status in statuses['data']:
-                w.writerow(processFacebookPageFeedStatus(status, access_token))
+                # w.writerow(processFacebookPageFeedStatus(status, access_token))
+                print(processFacebookPageFeedStatus(status, access_token))
                 
                 # output progress occasionally to make sure code is not stalling
                 num_processed += 1
