@@ -5,3 +5,4 @@ psycopg2
 whitenoise
 cryptography
 algoliasearch-django
+django-redis-cache
