@@ -100,8 +100,8 @@ $(document).ready(function() {
       $noHits.addClass('hidden');
     }
 
-    $hitsStat.html('<p class="text-right">Found <b>' +
-        content.nbHits + '</b> results in <b>' + content.processingTimeMS + '</b>ms, ' +
+    $hitsStat.html('<p class="text-right"><b>' +
+        content.nbHits + '</b> та натижа, <b>' + content.processingTimeMS + '</b>ms вақт ичида, ' +
         'by <a href="http://www.algolia.com"><img src="{% static "img/logo-algolia.png" %}" /></a></p>'
     );
   }
