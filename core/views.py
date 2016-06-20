@@ -8,8 +8,10 @@ from .models import Post
 
 # Create your views here.
 def index(request):
-    # return HttpResponse('Hello from Python!')
-    return render(request, 'index.html')
+    context = {
+        'last_posts': Post.objects.order_by('-published').all()[10]
+    }
+    return render(request, 'index.html', context)
 
 
 def instant_search(request):

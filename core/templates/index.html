@@ -4,6 +4,26 @@
 {% block content %}
 
 <div class="container">
-  Maslahat
+    <table class="table table-hover table-condensed">
+        <thead>
+            <tr>
+                <th>Пост матни</th>
+                <th>Муалллиф</th>
+                <th>Ёзилган вақти</th>
+                <th>Лайклар</th>
+                <th>Улашишлар</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for post in last_posts %}
+            <tr>
+                <td>{{ post.text|truncatechars:32 }}</td>
+                <td>{{ post.author }}</td>
+                <td>{{ post.published }}</td>
+                <td>{{ post.likes }}</td>
+                <td>{{ post.shares }}</td>
+            </tr>
+            {% endfor %}
+    </table>
 </div>
 {% endblock %}
