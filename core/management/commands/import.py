@@ -109,31 +109,32 @@ class Command(BaseCommand):
         while has_next_page:
             for status in statuses['data']:
                 resp_data = self.processFacebookPageFeedStatus(status, access_token)  # noqa
-                # post_exists = Post.objects.filter(id=resp_data[0])
-
-                post = Post()
-                post.id = resp_data[0]
-                post.text = resp_data[1]
-                post.author = resp_data[2]
-                post.type = resp_data[4]
-                post.link = resp_data[5]
-                post.published = parse_datetime(resp_data[6])
-                post.reactions = resp_data[7]
-                post.comments = resp_data[8]
-                post.shares = resp_data[9]
-                post.likes = resp_data[10]
-                post.loves = resp_data[11]
-                post.wows = resp_data[12]
-                post.hahas = resp_data[13]
-                post.sads = resp_data[14]
-                post.angrys = resp_data[15]
-
                 try:
-                    post.save()
-                except AlgoliaException:
+                    Post.objects.update_or_create(
+                        id=resp_data[0],
+                        text=resp_data[1],
+                        author=resp_data[2],
+                        type=resp_data[4],
+                        link=resp_data[5],
+                        published=parse_datetime(resp_data[6]),
+                        reactions=resp_data[7],
+                        comments=resp_data[8],
+                        shares=resp_data[9],
+                        likes=resp_data[10],
+                        loves=resp_data[11],
+                        wows=resp_data[12],
+                        hahas=resp_data[13],
+                        sads=resp_data[14],
+                        angrys=resp_data[15])
+
+                except AlgoliaException as e:
+                    print(str(e))
+                    # text = "Cannot index post %s: %s" % (
+                    #         resp_data[0], datetime.datetime.now())
+                    # self.stdout.write(self.style.ERROR(text))
                     pass
 
-                text = "%s post processed: %s" % (post.id, datetime.datetime.now())  # noqa
+                text = "%s post processed: %s" % (resp_data[0], datetime.datetime.now())  # noqa
                 self.stdout.write(self.style.SUCCESS(text))
                 num_processed += 1
                 if num_processed % 100 == 0:
