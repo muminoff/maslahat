@@ -13,6 +13,7 @@ class Post(models.Model):
     shares = models.IntegerField()
     likes = models.IntegerField()
     loves = models.IntegerField()
+    wows = models.IntegerField()
     hahas = models.IntegerField()
     sads = models.IntegerField()
     angrys = models.IntegerField()
