@@ -32,9 +32,7 @@ class Command(BaseCommand):
                 response = urllib2.urlopen(req)
                 if response.getcode() == 200:
                     success = True
-            except Exception, e:
-                self.stdout.write(self.style.ERROR(e))
-                time.sleep(5)
+            except:
                 text = "Error for URL %s: %s" % (url, datetime.datetime.now())
                 self.stdout.write(self.style.ERROR(text))
 
