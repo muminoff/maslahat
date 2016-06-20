@@ -130,7 +130,7 @@ class Command(BaseCommand):
                         })
 
                 except AlgoliaException as e:
-                    self.stdout.write(self.style.ERROR(str(e))
+                    self.stdout.write(self.style.ERROR(str(e)))
                     text = "Cannot index post %s: %s" % (
                             resp_data[0], datetime.datetime.now())
                     self.stdout.write(self.style.ERROR(text))
