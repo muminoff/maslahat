@@ -102,12 +102,11 @@ class Command(BaseCommand):
         while has_next_page:
             for status in statuses['data']:
                 resp_data = self.processFacebookPageFeedStatus(status, access_token)  # noqa
-                print('------------>', resp_data[2])
                 try:
                     Post.objects.update_or_create(
                         id=resp_data[0],
                         defaults={
-                            'text': resp_data[1],
+                            'text': resp_data[1][:35],  # trim
                             'author': resp_data[2]['name'],
                             'author_id': resp_data[2]['id'],
                             'type': resp_data[4],
@@ -136,9 +135,6 @@ class Command(BaseCommand):
                 if num_processed % 100 == 0:
                     text = "%s posts processed: %s" % (num_processed, datetime.datetime.now())  # noqa
                     self.stdout.write(self.style.SUCCESS(text))
-
-                import sys
-                sys.exit(0)
 
             if 'paging' in statuses.keys():
                 statuses = json.loads(self.request_until_succeed(statuses['paging']['next']))  # noqa

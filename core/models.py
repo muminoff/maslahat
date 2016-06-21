@@ -3,7 +3,7 @@ from django.db import models
 
 class Post(models.Model):
     id = models.CharField(primary_key=True, max_length=256)
-    text = models.TextField()
+    text = models.CharField(max_length=35)
     author = models.TextField()
     author_id = models.TextField()
     link = models.TextField()
