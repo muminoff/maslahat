@@ -41,10 +41,6 @@ class Command(BaseCommand):
 
         return response.read().decode('utf-8')
 
-    # Needed to write tricky unicode correctly to csv
-    def unicode_normalize(self, text):
-            return text.translate({0x2018: 0x27, 0x2019: 0x27, 0x201C: 0x22, 0x201D: 0x22, 0xa0: 0x20}).encode('utf-8')  # noqa
-
     def getFacebookPageFeedData(self, group_id, access_token, num_statuses):
         base = "https://graph.facebook.com/v2.6"
         node = "/%s/feed" % group_id
@@ -73,11 +69,11 @@ class Command(BaseCommand):
 
     def processFacebookPageFeedStatus(self, status, access_token):
         status_id = status['id']
-        status_message = '' if 'message' not in status.keys() else self.unicode_normalize(status['message'])  # noqa
-        link_name = '' if 'name' not in status.keys() else self.unicode_normalize(status['name'])  # noqa
+        status_message = '' if 'message' not in status.keys() else status['message']  # noqa
+        link_name = '' if 'name' not in status.keys() else status['name']  # noqa
         status_type = status['type']
-        status_link = '' if 'link' not in status.keys() else self.unicode_normalize(status['link'])  # noqa
-        status_author = self.unicode_normalize(status['from']['name'])
+        status_link = '' if 'link' not in status.keys() else status['link']  # noqa
+        status_author = status['from']
         status_published = datetime.datetime.strptime(status['created_time'], '%Y-%m-%dT%H:%M:%S+0000')  # noqa
         status_published = status_published + datetime.timedelta(hours=-5)
         status_published = status_published.strftime('%Y-%m-%d %H:%M:%S')  # noqa
@@ -106,12 +102,14 @@ class Command(BaseCommand):
         while has_next_page:
             for status in statuses['data']:
                 resp_data = self.processFacebookPageFeedStatus(status, access_token)  # noqa
+                print('------------>', resp_data[2])
                 try:
                     Post.objects.update_or_create(
                         id=resp_data[0],
                         defaults={
                             'text': resp_data[1],
-                            'author': resp_data[2],
+                            'author': resp_data[2]['name'],
+                            'author_id': resp_data[2]['id'],
                             'type': resp_data[4],
                             'link': resp_data[5],
                             'published': parse_datetime(resp_data[6]),
@@ -126,9 +124,9 @@ class Command(BaseCommand):
                             'angrys': resp_data[15]
                         })
 
-                except AlgoliaException as e:
+                except Exception as e:
                     self.stdout.write(self.style.ERROR(str(e)))
-                    text = "Cannot index post %s: %s" % (
+                    text = "Cannot insert post %s: %s" % (
                             resp_data[0], datetime.datetime.now())
                     self.stdout.write(self.style.ERROR(text))
 
@@ -138,6 +136,9 @@ class Command(BaseCommand):
                 if num_processed % 100 == 0:
                     text = "%s posts processed: %s" % (num_processed, datetime.datetime.now())  # noqa
                     self.stdout.write(self.style.SUCCESS(text))
+
+                import sys
+                sys.exit(0)
 
             if 'paging' in statuses.keys():
                 statuses = json.loads(self.request_until_succeed(statuses['paging']['next']))  # noqa

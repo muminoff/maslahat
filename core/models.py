@@ -5,6 +5,7 @@ class Post(models.Model):
     id = models.CharField(primary_key=True, max_length=256)
     text = models.TextField()
     author = models.TextField()
+    author_id = models.TextField()
     link = models.TextField()
     type = models.TextField()
     published = models.DateTimeField()

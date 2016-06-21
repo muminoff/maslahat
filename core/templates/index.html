@@ -19,8 +19,8 @@
         <tbody>
             {% for post in last_posts %}
             <tr>
-                <td><a href="http://fb.com/{{ post.id }}">{{ post.text|truncatechars:32 }}</a></td>
-                <td>{{ post.author }}</td>
+                <td><a href="http://fb.com/{{ post.id }}" target="_blank">{{ post.text|truncatechars:32 }}</a></td>
+                <td><img src="https://graph.facebook.com/{{ post.author_id }}/picture?type=square&width=24&height=24"/> {{ post.author }}</td>
                 <td>{{ post.shares }}</td>
                 <td>{{ post.likes }}</td>
                 <td>{{ post.comments }}</td>
