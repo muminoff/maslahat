@@ -5,4 +5,7 @@ from .models import Post
 
 
 def index(request):
-    return render(request, 'index.html')
+    context = {
+        'last_posts': Post.objects.order_by('-published')[:100]
+    }
+    return render(request, 'index.html', context)
