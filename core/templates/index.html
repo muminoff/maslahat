@@ -5,6 +5,28 @@
 {% block content %}
 
 <div class="container">
-    Маслаҳат.уз
+    <h3>Оҳирги постлар</h3>
+    <table class="table table-condensed table-hover">
+        <thead>
+            <tr>
+                <th>Пост</th>
+                <th>Муаллиф</th>
+                <th>Улашишлар</th>
+                <th>Лайклар</th>
+                <th>Изоҳлар</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for post in last_posts %}
+            <tr>
+                <td>{{ post.text|truncatechars:32 }}</td>
+                <td>{{ post.author }}</td>
+                <td>{{ post.shares }}</td>
+                <td>{{ post.likes }}</td>
+                <td>{{ post.comments }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
 {% endblock %}
