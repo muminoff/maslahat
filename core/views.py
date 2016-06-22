@@ -61,7 +61,7 @@ def top_posters(request):
 
 def top_shared_posts(request):
     context = {
-        'top_shared_posts': Post.objects.order_by('shares')[:20]
+        'top_shared_posts': Post.objects.order_by('-shares')[:20]
     }
     return render(request, 'top_shared_posts.html', context)
 
