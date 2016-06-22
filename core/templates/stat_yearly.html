@@ -19,8 +19,7 @@
         <tbody>
             {% for this_year in posts_per_year %}
             <tr>
-                <td>{{ this_year.year }}</td>
-                <td>{{ this_year.year|date:"%Y" }}</td>
+                <td>{{ this_year.year|date:"Y" }}</td>
                 <td>{{ this_year.posts }}</td>
                 <td>{{ this_year.comments }}</td>
                 <td>{{ this_year.reactions }}</td>
