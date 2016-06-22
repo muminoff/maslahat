@@ -6,7 +6,6 @@ from django.conf import settings
 from django.db import connection
 from django.db.models import Count, Sum
 from django.db.models.functions import TruncYear, TruncMonth, ExtractWeekDay
-from django.conf import settings
 
 # Core
 from .models import Post
@@ -14,6 +13,9 @@ from .models import Post
 # Misc
 import redis
 import sys
+import os
+from urllib.parse import urlparse
+redis_url = urlparse(os.environ.get('REDIS_URL'))
 
 
 def stat_yearly(request):
@@ -119,4 +121,4 @@ def get_postgre_version():
     return cursor.fetchone()[0]
 
 def get_redis_version():
-    return settings.redis_url
+    return redis_url
