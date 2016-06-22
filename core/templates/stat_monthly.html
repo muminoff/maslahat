@@ -26,7 +26,7 @@
             {% cache 3600 posts_per_month %}
             {% for this_year in posts_per_month %}
             <tr>
-                <td>{{ this_year.month|date:"m-Y" }}</td>
+                <td>{{ this_year.month|date:"m-Y"|uzbekify_monthyear }}</td>
                 <td>{{ this_year.posts }}</td>
                 <td>{{ this_year.comments }}</td>
                 <td>{{ this_year.reactions }}</td>
