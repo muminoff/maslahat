@@ -1,6 +1,8 @@
+import django
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.conf import settings
+from django.db import connection
 from django.db.models import Count, Sum
 from django.db.models.functions import TruncYear, TruncMonth, ExtractWeekDay
 from .models import Post
@@ -89,3 +91,16 @@ def index(request):
         'last_posts': Post.objects.order_by('-published')[:100]
     }
     return render(request, 'index.html', context)
+
+
+def about(request):
+    context = {
+        'django_version': django.get_version(),
+        'postgre_version': get_postgre_version(),
+    }
+    return render(request, 'about.html', context)
+
+def get_postgre_version():
+    cursor = connection.cursor()
+    cursor.execute("SELECT version();")
+    return cursor.fetchone()
