@@ -44,7 +44,7 @@ def stat_monthly(request):
 
 def stat_weekdays(request):
     context = {
-        'posts': Post.objects.annotate(
+        'posts_per_weekday': Post.objects.annotate(
             weekday=ExtractWeekDay('published')).values('weekday').annotate(
                 posts=Count('id'),
                 comments=Sum('comments'),
