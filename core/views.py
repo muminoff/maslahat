@@ -1,3 +1,4 @@
+# Django
 import django
 from django.shortcuts import render
 from django.http import HttpResponse
@@ -5,7 +6,14 @@ from django.conf import settings
 from django.db import connection
 from django.db.models import Count, Sum
 from django.db.models.functions import TruncYear, TruncMonth, ExtractWeekDay
+from django.conf import settings
+
+# Core
 from .models import Post
+
+# Misc
+import redis
+import sys
 
 
 def stat_yearly(request):
@@ -95,12 +103,20 @@ def index(request):
 
 def about(request):
     context = {
+        'python_version': get_python_version(),
         'django_version': django.get_version(),
         'postgre_version': get_postgre_version(),
+        'redis_version': get_redis_version(),
     }
     return render(request, 'about.html', context)
+
+def get_python_version():
+    return sys.version
 
 def get_postgre_version():
     cursor = connection.cursor()
     cursor.execute("SELECT version();")
-    return cursor.fetchone()
+    return cursor.fetchone()[0]
+
+def get_redis_version():
+    return settings.redis_url
