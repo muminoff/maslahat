@@ -129,8 +129,8 @@ class Command(BaseCommand):
                             resp_data[0], datetime.datetime.now())
                     self.stdout.write(self.style.ERROR(text))
 
-                text = "%s post processed: %s" % (resp_data[0], datetime.datetime.now())  # noqa
-                self.stdout.write(self.style.SUCCESS(text))
+                # text = "%s post processed: %s" % (resp_data[0], datetime.datetime.now())  # noqa
+                # self.stdout.write(self.style.SUCCESS(text))
                 num_processed += 1
                 if num_processed % 100 == 0:
                     text = "%s posts processed: %s" % (num_processed, datetime.datetime.now())  # noqa

@@ -10,6 +10,7 @@
         <thead>
             <tr>
                 <th>Пост</th>
+                <th>Вақт</th>
                 <th>Муаллиф</th>
                 <th>Улашишлар</th>
                 <th>Лайклар</th>
@@ -21,6 +22,7 @@
             {% for post in last_posts %}
             <tr>
                 <td><a href="http://fb.com/{{ post.id }}" target="_blank">{{ post.text|truncatechars:32 }}</a></td>
+                <td>{{ post.published|date:"SHORT_DATE_FORMAT" }}</td>
                 <td><img src="https://graph.facebook.com/{{ post.author_id }}/picture?type=square&width=24&height=24"/> {{ post.author }}</td>
                 <td>{{ post.shares }}</td>
                 <td>{{ post.likes }}</td>
