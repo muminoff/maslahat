@@ -121,4 +121,9 @@ def get_postgre_version():
     return cursor.fetchone()[0]
 
 def get_redis_version():
-    return redis_url.hostname
+    r = redis.StrictRedis(
+        host=redis_url.hostname,
+        port=redis_url.port,
+        db=0,
+        password=redis_url.password)
+    return r.info()['redis_version']
