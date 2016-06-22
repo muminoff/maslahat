@@ -55,7 +55,7 @@ def uzbekify_time(value):
 @register.filter
 @stringfilter
 def uzbekify_weekday(value):
-    weekday_names_in_uzbek = [ 'якшанба', 'душанба', 'сешанба', 'чоршанба', 'пайшанба', 'жума', 'шанба' ]
+    weekday_names_in_uzbek = [ 'Якшанба', 'Душанба', 'Сешанба', 'Чоршанба', 'Пайшанба', 'Жума', 'Шанба' ]
     return weekday_names_in_uzbek[int(float(value))-1]
 
 
