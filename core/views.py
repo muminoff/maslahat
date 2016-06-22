@@ -55,7 +55,7 @@ def stat_weekdays(request):
                 wows=Sum('wows'),
                 hahas=Sum('hahas'),
                 sads=Sum('sads'),
-                angrys=Sum('angrys')).order_by('-weekday')
+                angrys=Sum('angrys')).order_by('weekday')
     }
     return render(request, 'stat_weekdays.html', context)
 

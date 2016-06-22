@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load staticfiles %}
+{% load localize_time %}
 {% load cache %}
 
 {% block content %}
@@ -9,7 +10,6 @@
     <table class="table table-condensed table-hover">
         <thead>
             <tr>
-                <th>№</th>
                 <th>Ҳафта куни</th>
                 <th>Постлар сони</th>
                 <th>Изоҳлар</th>
@@ -27,8 +27,7 @@
             {% cache 3600 posts_per_weekday %}
             {% for post in posts_per_weekday %}
             <tr>
-                <td>{{ forloop.counter }}.</td>
-                <td>{{ post.weekday }}</td>
+                <td>{{ post.weekday|uzbekify_weekday }}</td>
                 <td>{{ post.posts }}</td>
                 <td>{{ post.comments }}</td>
                 <td>{{ post.reactions }}</td>
