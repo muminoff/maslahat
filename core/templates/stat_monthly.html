@@ -18,7 +18,7 @@
             </tr>
         </thead>
         <tbody>
-            {% cache 3600 last_posts %}
+            {% cache 3600 posts_per_month %}
             {% for this_year in posts_per_month %}
             <tr>
                 <td>{{ this_year.month|date:"m-Y" }}</td>
