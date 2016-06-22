@@ -108,7 +108,11 @@ def index(request):
 
 def news(request):
     context = {
-        'todays_posts': Post.objects.filter(published__lte=timezone.now().date()).order_by('-published')
+        'todays_posts': Post.objects.filter(
+            published__year=timezone.now().year,
+            published__month=timezone.now().month,
+            published__day=timezone.now().day
+            ).order_by('-published')
     }
     return render(request, 'news.html', context)
 
