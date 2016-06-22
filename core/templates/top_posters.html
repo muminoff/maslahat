@@ -28,7 +28,7 @@
             {% for poster in top_posters %}
             <tr>
                 <td>{{ forloop.counter }}.</td>
-                <td><img src="https://graph.facebook.com/{{ poster.author_id }}/picture?type=square&width=24&height=24"/> {{ post.author }}</td>
+                <td><img src="https://graph.facebook.com/{{ poster.author_id }}/picture?type=square&width=24&height=24"/> {{ poster.author }}</td>
                 <td>{{ poster.times }}</td>
                 <td>{{ poster.comments }}</td>
                 <td>{{ poster.reactions }}</td>
