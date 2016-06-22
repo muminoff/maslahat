@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="container">
+    <h3>Ойлик статистика</h3>
+    <table class="table table-condensed table-hover">
+        <thead>
+            <tr>
+                <th>Ойлар</th>
+                <th>Постлар</th>
+                <th>Изоҳлар</th>
+                <th>Муносабатлар</th>
+                <th>Улашишлар</th>
+                <th>Лайклар</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for this_year in posts_per_month %}
+            <tr>
+                <td>{{ this_year.month|date:"M-Y" }}</td>
+                <td>{{ this_year.posts }}</td>
+                <td>{{ this_year.comments }}</td>
+                <td>{{ this_year.reactions }}</td>
+                <td>{{ this_year.shares }}</td>
+                <td>{{ this_year.likes }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
