@@ -121,4 +121,4 @@ def get_postgre_version():
     return cursor.fetchone()[0]
 
 def get_redis_version():
-    return redis_url
+    return redis_url.hostname
