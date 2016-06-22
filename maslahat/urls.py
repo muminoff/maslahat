@@ -11,5 +11,7 @@ import core.views
 
 urlpatterns = [
     url(r'^$', core.views.index, name='index'),
+    url(r'^stat/yearly/$', core.views.stat_yearly, name='stat_yearly'),
+    url(r'^stat/monthly/$', core.views.stat_monthly, name='stat_monthly'),
     # url(r'^admin/', include(admin.site.urls)),
 ]
