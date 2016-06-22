@@ -107,7 +107,7 @@ class Command(BaseCommand):
                     Post.objects.update_or_create(
                         id=resp_data[0],
                         defaults={
-                            'text': resp_data[1][:35],  # trim
+                            'text': resp_data[1],
                             'author': resp_data[2]['name'],
                             'author_id': resp_data[2]['id'],
                             'type': resp_data[4],
