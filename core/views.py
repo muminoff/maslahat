@@ -18,7 +18,7 @@ from urllib.parse import urlparse
 redis_url = urlparse(os.environ.get('REDIS_URL'))
 
 # Stathat
-from stathat import Stathat
+from stathat import StatHat
 
 
 def stat_yearly(request):
