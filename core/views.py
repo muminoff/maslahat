@@ -46,7 +46,15 @@ def top_posters(request):
     context = {
         'top_posters': Post.objects.values('author').annotate(
             times=Count('author'),
-            ).order_by('-times')[:20]
+            comments=Sum('comments'),
+            reactions=Sum('reactions'),
+            shares=Sum('shares'),
+            likes=Sum('likes'),
+            loves=Sum('loves'),
+            wows=Sum('wows'),
+            hahas=Sum('hahas'),
+            sads=Sum('sads'),
+            angrys=Sum('angrys')).order_by('-times')[:20]
     }
     return render(request, 'top_posters.html', context)
 
