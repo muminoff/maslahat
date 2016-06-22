@@ -27,7 +27,7 @@ def stat_yearly(request):
 def stat_monthly(request):
     context = {
         'posts_per_month': Post.objects.annotate(
-            year=TruncMonth('published')).values('month').annotate(
+            month=TruncMonth('published')).values('month').annotate(
                 posts=Count('id'),
                 comments=Sum('comments'),
                 reactions=Sum('reactions'),
