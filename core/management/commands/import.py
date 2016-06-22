@@ -2,6 +2,7 @@
 from django.core.management.base import BaseCommand
 from django.utils.dateparse import parse_datetime
 from django.conf import settings
+from django.utils import timezone
 
 # Core
 from core.models import Post
@@ -111,7 +112,9 @@ class Command(BaseCommand):
                             'author_id': resp_data[2]['id'],
                             'type': resp_data[4],
                             'link': resp_data[5],
-                            'published': parse_datetime(resp_data[6]),
+                            'published': timezone.make_aware(
+                                parse_datetime(resp_data[6]),
+                                timezone.get_current_timezone()),
                             'reactions': resp_data[7],
                             'comments': resp_data[8],
                             'shares': resp_data[9],
