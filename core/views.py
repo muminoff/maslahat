@@ -126,6 +126,14 @@ def about(request):
     }
     return render(request, 'about.html', context)
 
+
+def not_found(request):
+    return render(request, '404.html')
+
+
+def server_error(request):
+    return render(request, '404.html')
+
 def get_python_version():
     return sys.version
 
