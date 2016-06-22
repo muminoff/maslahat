@@ -42,6 +42,15 @@ def stat_monthly(request):
     return render(request, 'stat_monthly.html', context)
 
 
+def top_posters(request):
+    context = {
+        'top_posters': Post.objects.values('author').annotate(
+            times=Count('author'),
+            ).order_by('-times')[:20]
+    }
+    return render(request, 'top_posters.html', context)
+
+
 def index(request):
     context = {
         'last_posts': Post.objects.order_by('-published')[:100]
