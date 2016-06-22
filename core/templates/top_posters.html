@@ -9,6 +9,7 @@
     <table class="table table-condensed table-hover">
         <thead>
             <tr>
+                <th>№</th>
                 <th>Муаллиф</th>
                 <th>Сони</th>
                 <th>Изоҳлар</th>
@@ -26,7 +27,8 @@
             {% cache 3600 top_posters %}
             {% for poster in top_posters %}
             <tr>
-                <td>{{ poster.author }}</td>
+                <td>{{ forloop.counter }}.</td>
+                <td><img src="https://graph.facebook.com/{{ post.author_id }}/picture?type=square&width=24&height=24"/> {{ post.author }}</td>
                 <td>{{ poster.times }}</td>
                 <td>{{ poster.comments }}</td>
                 <td>{{ poster.reactions }}</td>
