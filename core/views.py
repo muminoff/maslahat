@@ -136,7 +136,7 @@ def not_found(request):
 
 
 def server_error(request):
-    return render(request, '404.html')
+    return render(request, '500.html')
 
 def get_python_version():
     return sys.version
