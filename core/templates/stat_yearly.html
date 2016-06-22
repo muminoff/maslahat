@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load staticfiles %}
+{% load_cache %}
 
 {% block content %}
 
@@ -17,6 +18,7 @@
             </tr>
         </thead>
         <tbody>
+            {% cache 3600 last_posts %}
             {% for this_year in posts_per_year %}
             <tr>
                 <td>{{ this_year.year|date:"Y" }}</td>
@@ -27,6 +29,7 @@
                 <td>{{ this_year.likes }}</td>
             </tr>
             {% endfor %}
+            {% endcache %}
         </tbody>
     </table>
 </div>

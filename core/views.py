@@ -19,7 +19,7 @@ def stat_yearly(request):
                 wows=Sum('wows'),
                 hahas=Sum('hahas'),
                 sads=Sum('sads'),
-                angrys=Sum('angrys'))
+                angrys=Sum('angrys').order_by('-year'))
     }
     return render(request, 'stat_yearly.html', context)
 
@@ -37,7 +37,7 @@ def stat_monthly(request):
                 wows=Sum('wows'),
                 hahas=Sum('hahas'),
                 sads=Sum('sads'),
-                angrys=Sum('angrys'))
+                angrys=Sum('angrys').order_by('-month'))
     }
     return render(request, 'stat_monthly.html', context)
 
