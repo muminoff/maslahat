@@ -26,10 +26,10 @@ def uzbekify_daymonthyear(value):
 @stringfilter
 def uzbekify_monthyear(value):
     month_names_in_uzbek = [
-            'январь', 'февраль', 'март',
-            'апрель', 'май', 'июнь',
-            'июль', 'август', 'сентябрь',
-            'октябрь', 'ноябрь', 'декабрь'
+            'Январь', 'Февраль', 'Март',
+            'Апрель', 'Май', 'Июнь',
+            'Июль', 'Август', 'Сентябрь',
+            'Октябрь', 'Ноябрь', 'Декабрь'
             ]
     month, year = value.split('-')
     return '{month}, {year} йил'.format(
