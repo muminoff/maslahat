@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load cache %}
+
+{% block content %}
+
+<div class="container">
+    <h3>Энг кўп пост ёзганлар</h3>
+    <table class="table table-condensed table-hover">
+        <thead>
+            <tr>
+                <th>Муаллиф</th>
+                <th>Сони</th>
+                <th>Изоҳлар</th>
+                <th>Муносабатлар</th>
+                <th>Улашишлар</th>
+                <th>👍</th>
+                <th>😍</th>
+                <th>😮</th>
+                <th>😆</th>
+                <th>😞</th>
+                <th>😡</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% cache 3600 top_posters %}
+            {% for poster in top_posters %}
+            <tr>
+                <td>{{ poster.author }}</td>
+                <td>{{ poster.times }}</td>
+                <td>{{ poster.comments }}</td>
+                <td>{{ poster.reactions }}</td>
+                <td>{{ poster.shares }}</td>
+                <td>{{ poster.likes }}</td>
+                <td>{{ poster.loves }}</td>
+                <td>{{ poster.wows }}</td>
+                <td>{{ poster.hahas }}</td>
+                <td>{{ poster.sads }}</td>
+                <td>{{ poster.angrys }}</td>
+            </tr>
+            {% endfor %}
+            {% endcache %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
