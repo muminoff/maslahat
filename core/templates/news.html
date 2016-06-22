@@ -5,7 +5,7 @@
 {% block content %}
 
 <div class="container">
-    <h3>Оҳирги постлар</h3>
+    <h3>{{ title }}</h3>
     <table class="table table-condensed table-hover">
         <thead>
             <tr>
@@ -24,8 +24,8 @@
             </tr>
         </thead>
         <tbody>
-            {% cache 3600 last_posts %}
-            {% for post in last_posts %}
+            {% cache 3600 todays_posts %}
+            {% for post in todays_posts %}
             <tr>
                 <td><a href="http://fb.com/{{ post.id }}" target="_blank">{{ post.text|truncatechars:32 }}</a></td>
                 <td>{{ post.published|date:"SHORT_DATETIME_FORMAT" }}</td>

@@ -2,6 +2,7 @@
 import django
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.utils import timezone
 from django.conf import settings
 from django.db import connection
 from django.db.models import Count, Sum
@@ -107,7 +108,7 @@ def index(request):
 
 def news(request):
     context = {
-        'last_posts': Post.objects.order_by('-published')[:100]
+        'todays_posts': Post.objects.filter(published__lte=timezone.now().date()).order_by('-published')
     }
     return render(request, 'news.html', context)
 
