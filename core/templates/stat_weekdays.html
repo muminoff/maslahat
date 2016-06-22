@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load cache %}
+
+{% block content %}
+
+<div class="container">
+    <h3>Ҳафта кунлари бўйича статистика</h3>
+    <table class="table table-condensed table-hover">
+        <thead>
+            <tr>
+                <th>№</th>
+                <th>Ҳафта куни</th>
+                <th>Постлар сони</th>
+                <th>Изоҳлар</th>
+                <th>Муносабатлар</th>
+                <th>Улашишлар</th>
+                <th>👍</th>
+                <th>😍</th>
+                <th>😮</th>
+                <th>😆</th>
+                <th>😞</th>
+                <th>😡</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% cache 3600 posts_per_weekday %}
+            {% for post in posts_per_weekday %}
+            <tr>
+                <td>{{ forloop.counter }}.</td>
+                <td>{{ post.weekday }}</td>
+                <td>{{ post.posts }}</td>
+                <td>{{ post.comments }}</td>
+                <td>{{ post.reactions }}</td>
+                <td>{{ post.shares }}</td>
+                <td>{{ post.likes }}</td>
+                <td>{{ post.loves }}</td>
+                <td>{{ post.wows }}</td>
+                <td>{{ post.hahas }}</td>
+                <td>{{ post.sads }}</td>
+                <td>{{ post.angrys }}</td>
+            </tr>
+            {% endfor %}
+            {% endcache %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

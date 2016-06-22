@@ -42,6 +42,24 @@ def stat_monthly(request):
     return render(request, 'stat_monthly.html', context)
 
 
+def stat_weekdays(request):
+    context = {
+        'posts': Post.objects.annotate(
+            weekday=ExtractWeekDay('published')).values('weekday').annotate(
+                posts=Count('id'),
+                comments=Sum('comments'),
+                reactions=Sum('reactions'),
+                shares=Sum('shares'),
+                likes=Sum('likes'),
+                loves=Sum('loves'),
+                wows=Sum('wows'),
+                hahas=Sum('hahas'),
+                sads=Sum('sads'),
+                angrys=Sum('angrys')).order_by('-weekday')
+    }
+    return render(request, 'stat_weekdays.html', context)
+
+
 def top_posters(request):
     context = {
         'top_posters': Post.objects.values('author', 'author_id').annotate(
