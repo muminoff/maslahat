@@ -17,6 +17,9 @@ import os
 from urllib.parse import urlparse
 redis_url = urlparse(os.environ.get('REDIS_URL'))
 
+# Stathat
+from stathat import Stathat
+
 
 def stat_yearly(request):
     context = {
@@ -97,6 +100,8 @@ def top_shared_posts(request):
 
 
 def index(request):
+    stats = StatHat(settings.STATHAT_ACCOUNT)
+    stats.count('user.visited', 1)
     return render(request, 'index.html')
 
 
