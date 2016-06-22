@@ -97,10 +97,14 @@ def top_shared_posts(request):
 
 
 def index(request):
+    return render(request, 'index.html')
+
+
+def news(request):
     context = {
         'last_posts': Post.objects.order_by('-published')[:100]
     }
-    return render(request, 'index.html', context)
+    return render(request, 'news.html', context)
 
 
 def about(request):

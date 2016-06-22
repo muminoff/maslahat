@@ -11,6 +11,7 @@ import core.views
 
 urlpatterns = [
     url(r'^$', core.views.index, name='index'),
+    url(r'^news/$', core.views.news, name='news'),
     url(r'^about/$', core.views.about, name='about'),
     url(r'^stat/yearly/$', core.views.stat_yearly, name='stat_yearly'),
     url(r'^stat/monthly/$', core.views.stat_monthly, name='stat_monthly'),
