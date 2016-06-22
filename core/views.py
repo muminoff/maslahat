@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.conf import settings
 from django.db.models import Count, Sum
-from django.db.models.functions import TruncYear, TruncMonth
+from django.db.models.functions import TruncYear, TruncMonth, ExtractWeekDay
 from .models import Post
 
 
