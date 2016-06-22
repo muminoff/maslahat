@@ -127,6 +127,10 @@ def about(request):
     return render(request, 'about.html', context)
 
 
+def search(request):
+    return render(request, 'search.html')
+
+
 def not_found(request):
     return render(request, '404.html')
 

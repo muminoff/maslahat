@@ -28,7 +28,7 @@
               <li class="{% if v.active %}active{% endif %}"><a href="{% url k %}">{{ v.title }}</a></li>
               {% endif %}
               {% endfor %}
-              <form class="navbar-form navbar-left" role="search">
+              <form class="navbar-form navbar-left" role="search" action="{% url "search" %}">
               <div class="form-group">
                 <input type="text" class="form-control">
               </div>
