@@ -44,7 +44,7 @@ def stat_monthly(request):
 
 def top_posters(request):
     context = {
-        'top_posters': Post.objects.values('author').annotate(
+        'top_posters': Post.objects.values('author', 'author_id').annotate(
             times=Count('author'),
             comments=Sum('comments'),
             reactions=Sum('reactions'),
