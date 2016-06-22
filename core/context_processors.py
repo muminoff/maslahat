@@ -7,7 +7,7 @@ def menu(request):
     title = None
 
     main_menu = OrderedDict([
-        ('index', {
+        ('news', {
             'title': _('Сўнгги янгиликлар'),
         }),
         ('stat', {
