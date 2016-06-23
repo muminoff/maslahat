@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load tz %}
+{% block content %}
+<div class="container" style="display:flex;justify-content:center;align-items:center;">
+  <div>
+      <h3>{{ author }} томонидан ёзилган постлар <small>Жами {{ posts|length }} та пост</small></h3>
+      <hr/>
+      <table class="table table-condensed table-hover">
+          <thead>
+              <tr>
+                  <th>№</th>
+                  <th>Пост</th>
+                  <th>Вақт</th>
+                  <th>Изоҳлар</th>
+                  <th>Муносабатлар</th>
+                  <th>Улашишлар</th>
+                  <th>👍</th>
+                  <th>😍</th>
+                  <th>😮</th>
+                  <th>😆</th>
+                  <th>😞</th>
+                  <th>😡</th>
+              </tr>
+          </thead>
+          <tbody>
+              {% for post in posts %}
+              <tr>
+                  <td>{{ forloop.counter }}.</td>
+                  <td><a href="http://fb.com/{{ post.id }}" target="_blank">{{ post.text|truncatechars:32 }}</a></td>
+                  {% localtime on %}
+                  <td>{{ post.published|date:"SHORT_DATETIME_FORMAT" }}</td>
+                  {% endlocaltime %}
+                  <td>{{ post.comments }}</td>
+                  <td>{{ post.reactions }}</td>
+                  <td>{{ post.shares }}</td>
+                  <td>{{ post.likes }}</td>
+                  <td>{{ post.loves }}</td>
+                  <td>{{ post.wows }}</td>
+                  <td>{{ post.hahas }}</td>
+                  <td>{{ post.sads }}</td>
+                  <td>{{ post.angrys }}</td>
+              </tr>
+              {% endfor %}
+          </tbody>
+      </table>
+  </div>
+</div>
+{% endblock %}

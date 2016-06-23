@@ -11,6 +11,7 @@
             <tr>
                 <th>№</th>
                 <th>Муаллиф</th>
+                <th></th>
                 <th>Сони</th>
                 <th>Изоҳлар</th>
                 <th>Муносабатлар</th>
@@ -24,11 +25,11 @@
             </tr>
         </thead>
         <tbody>
-            {% cache 3600 top_posters %}
             {% for poster in top_posters %}
             <tr>
                 <td>{{ forloop.counter }}.</td>
-                <td><img src="https://graph.facebook.com/{{ poster.author_id }}/picture?type=square&width=24&height=24"/> {{ poster.author }}</td>
+                <td><img src="https://graph.facebook.com/{{ poster.author_id }}/picture?type=square&width=24&height=24"/> {{ poster.author }} </td>
+                <td><a href="{% url "author_posts" poster.author %}" class="btn btn-xs btn-primary">постлар</a></td>
                 <td>{{ poster.times }}</td>
                 <td>{{ poster.comments }}</td>
                 <td>{{ poster.reactions }}</td>
@@ -41,7 +42,6 @@
                 <td>{{ poster.angrys }}</td>
             </tr>
             {% endfor %}
-            {% endcache %}
         </tbody>
     </table>
 </div>

@@ -151,6 +151,14 @@ def search(request):
     return render(request, 'search.html', context)
 
 
+def author_posts(request, author):
+    context = {
+        'posts': Post.objects.filter(author=author).order_by('-published'),
+        'author': author
+    }
+    return render(request, 'author_posts.html', context)
+
+
 def not_found(request):
     return render(request, '404.html')
 
