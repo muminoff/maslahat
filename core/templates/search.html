@@ -3,20 +3,8 @@
 {% block content %}
 <div class="container" style="display:flex;justify-content:center;align-items:center;">
   <div>
-      <form action="{% url "search" %}">
-        <div class="form-group">
-          <label for="text">Пост матни</label>
-          <input type="text" class="form-control" id="text" name="text">
-        </div>
-        <div class="form-group">
-          <label for="author">Пост муаллифи</label>
-          <input type="text" class="form-control" id="author" name="author" >
-        </div>
-        <button type="submit" class="btn btn-default">Қидириш</button>
-      </form>
-      <br/>
       {% if results %}
-      <h3>"{{ text }}" сўрови бўйича қидирув натижалари <small>{{ results|length }} та натижа</small></h3>
+      <h3>"{{ text }} {{ author }}" сўрови бўйича қидирув натижалари <small>{{ results|length }} та натижа</small></h3>
       <hr/>
       <table class="table table-condensed table-hover">
           <thead>

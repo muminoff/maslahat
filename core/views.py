@@ -139,17 +139,12 @@ def about(request):
 
 def search(request):
     text = request.GET.get('text')
-    author = request.GET.get('author')
     results = Post.objects.all()
 
     if text:
         results = Post.objects.filter(
             text__icontains=text
             ).order_by('-published')
-    if author:
-        results = Post.objects.filter(
-            author__icontains=author).order_by('-published')
-
     context = { 'results': results, 'text': text }
     return render(request, 'search.html', context)
 
