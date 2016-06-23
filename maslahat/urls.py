@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'^stat/weekdays/$', core.views.stat_weekdays, name='stat_weekdays'),
     url(r'^top/posters/$', core.views.top_posters, name='top_posters'),
     url(r'^top/shared/posts/$', core.views.top_shared_posts, name='top_shared_posts'),
+    url(r'^top/commented/posts/$', core.views.top_commented_posts, name='top_commented_posts'),
 ]
 
 handler404 = 'core.views.not_found'

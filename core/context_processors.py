@@ -33,6 +33,9 @@ def menu(request):
                 ('top_shared_posts', {
                     'title': _('Энг кўп улашилган постлар'),
                 }),
+                ('top_commented_posts', {
+                    'title': _('Энг кўп муҳокама бўлган постлар'),
+                }),
             ]),
         }),
         ('about', {

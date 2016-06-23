@@ -100,6 +100,13 @@ def top_shared_posts(request):
     return render(request, 'top_shared_posts.html', context)
 
 
+def top_commented_posts(request):
+    context = {
+        'top_commented_posts': Post.objects.order_by('-comments')[:20]
+    }
+    return render(request, 'top_commented_posts.html', context)
+
+
 def index(request):
     stats = StatHat(settings.STATHAT_ACCOUNT)
     stats.count('user.visited', 1)
