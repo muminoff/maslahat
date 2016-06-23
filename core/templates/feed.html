@@ -25,8 +25,8 @@
             </tr>
         </thead>
         <tbody>
-            {% cache 3600 todays_posts %}
-            {% for post in todays_posts %}
+            {% cache 3600 new_posts %}
+            {% for post in new_posts %}
             <tr>
                 <td><a href="http://fb.com/{{ post.id }}" target="_blank">{{ post.text|truncatechars:32 }}</a></td>
                 {% localtime on %}
