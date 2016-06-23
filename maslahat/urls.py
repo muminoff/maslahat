@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'^top/posters/$', core.views.top_posters, name='top_posters'),
     url(r'^top/shared/posts/$', core.views.top_shared_posts, name='top_shared_posts'),
     url(r'^top/commented/posts/$', core.views.top_commented_posts, name='top_commented_posts'),
+    url(r'^top/liked/posts/$', core.views.top_liked_posts, name='top_liked_posts'),
 ]
 
 handler404 = 'core.views.not_found'

@@ -107,6 +107,13 @@ def top_commented_posts(request):
     return render(request, 'top_commented_posts.html', context)
 
 
+def top_liked_posts(request):
+    context = {
+        'top_liked_posts': Post.objects.order_by('-likes')[:20]
+    }
+    return render(request, 'top_liked_posts.html', context)
+
+
 def index(request):
     stats = StatHat(settings.STATHAT_ACCOUNT)
     stats.count('user.visited', 1)

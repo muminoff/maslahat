@@ -36,6 +36,9 @@ def menu(request):
                 ('top_commented_posts', {
                     'title': _('Энг кўп муҳокама бўлган постлар'),
                 }),
+                ('top_liked_posts', {
+                    'title': _('Кўпчиликка ёққан постлар'),
+                }),
             ]),
         }),
         ('about', {

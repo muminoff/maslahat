@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load cache %}
+
+{% block content %}
+
+<div class="container">
+    <h3>{{ title }}</h3>
+    <table class="table table-condensed table-hover">
+        <thead>
+            <tr>
+                <th>№</th>
+                <th>Пост</th>
+                <th>Муаллиф</th>
+                <th>Лайклар сони</th>
+                <th>Ёзилган вақти</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% cache 3600 top_liked_posts %}
+            {% for post in top_liked_posts %}
+            <tr>
+                <td>{{ forloop.counter }}.</td>
+                <td><a href="http://fb.com/{{ post.id }}" target="_blank">{{ post.text|truncatechars:32 }}</a></td>
+                <td><img src="https://graph.facebook.com/{{ post.author_id }}/picture?type=square&width=24&height=24"/> {{ post.author }}</td>
+                <td>{{ post.likes }}</td>
+                <td>{{ post.published|date:"SHORT_DATETIME_FORMAT" }}</td>
+            </tr>
+            {% endfor %}
+            {% endcache %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
