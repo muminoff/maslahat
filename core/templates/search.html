@@ -1,11 +1,14 @@
 {% extends "base.html" %}
+{% load tz %}
 {% block content %}
 <div class="container" style="display:flex;justify-content:center;align-items:center;">
   <div>
-      <h1>Қидирув натижалари</h1>
+      {% if results %}
+      <h3>"{{ text }}" сўрови бўйича қидирув натижалари <small>{{ results|length }} та натижа</small></h3>
       <table class="table table-condensed table-hover">
           <thead>
               <tr>
+                  <th>№</th>
                   <th>Пост</th>
                   <th>Вақт</th>
                   <th>Муаллиф</th>
@@ -23,6 +26,7 @@
           <tbody>
               {% for post in results %}
               <tr>
+                  <td>{{ forloop.counter }}.</td>
                   <td><a href="http://fb.com/{{ post.id }}" target="_blank">{{ post.text|truncatechars:32 }}</a></td>
                   {% localtime on %}
                   <td>{{ post.published|date:"SHORT_DATETIME_FORMAT" }}</td>
@@ -41,6 +45,9 @@
               {% endfor %}
           </tbody>
       </table>
+      {% else %}
+      <p>Ҳеч қандай натижа топилмади.</p>
+      {% endif %}
   </div>
 </div>
 {% endblock %}
