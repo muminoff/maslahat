@@ -3,7 +3,44 @@
 <div class="container" style="display:flex;justify-content:center;align-items:center;">
   <div>
       <h1>Қидирув натижалари</h1>
-      <p>Бу саҳифа устида иш олиб борилмоқда.</p>
+      <table class="table table-condensed table-hover">
+          <thead>
+              <tr>
+                  <th>Пост</th>
+                  <th>Вақт</th>
+                  <th>Муаллиф</th>
+                  <th>Изоҳлар</th>
+                  <th>Муносабатлар</th>
+                  <th>Улашишлар</th>
+                  <th>👍</th>
+                  <th>😍</th>
+                  <th>😮</th>
+                  <th>😆</th>
+                  <th>😞</th>
+                  <th>😡</th>
+              </tr>
+          </thead>
+          <tbody>
+              {% for post in results %}
+              <tr>
+                  <td><a href="http://fb.com/{{ post.id }}" target="_blank">{{ post.text|truncatechars:32 }}</a></td>
+                  {% localtime on %}
+                  <td>{{ post.published|date:"SHORT_DATETIME_FORMAT" }}</td>
+                  {% endlocaltime %}
+                  <td><img src="https://graph.facebook.com/{{ post.author_id }}/picture?type=square&width=24&height=24"/> {{ post.author }}</td>
+                  <td>{{ post.comments }}</td>
+                  <td>{{ post.reactions }}</td>
+                  <td>{{ post.shares }}</td>
+                  <td>{{ post.likes }}</td>
+                  <td>{{ post.loves }}</td>
+                  <td>{{ post.wows }}</td>
+                  <td>{{ post.hahas }}</td>
+                  <td>{{ post.sads }}</td>
+                  <td>{{ post.angrys }}</td>
+              </tr>
+              {% endfor %}
+          </tbody>
+      </table>
   </div>
 </div>
 {% endblock %}

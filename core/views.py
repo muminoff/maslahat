@@ -138,7 +138,14 @@ def about(request):
 
 
 def search(request):
-    return render(request, 'search.html')
+    text = request.GET.get('text')
+    author = request.GET.get('author')
+    context = {
+        'results': Post.objects.filter(
+            text__icontains=text,
+            author__icontains=author).order_by('-published')
+    }
+    return render(request, 'search.html', context)
 
 
 def not_found(request):
