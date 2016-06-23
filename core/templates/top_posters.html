@@ -25,6 +25,7 @@
             </tr>
         </thead>
         <tbody>
+            {% cache 3600 top_posters %}
             {% for poster in top_posters %}
             <tr>
                 <td>{{ forloop.counter }}.</td>
@@ -42,6 +43,7 @@
                 <td>{{ poster.angrys }}</td>
             </tr>
             {% endfor %}
+            {% endcache %}
         </tbody>
     </table>
 </div>
