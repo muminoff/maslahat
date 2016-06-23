@@ -145,6 +145,8 @@ def search(request):
         results = Post.objects.filter(
             text__icontains=text
             ).order_by('-published')
+    else:
+        results = None
     context = { 'results': results, 'text': text }
     return render(request, 'search.html', context)
 
