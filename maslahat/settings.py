@@ -150,7 +150,7 @@ STATICFILES_DIRS = (
 # https://warehouse.python.org/project/whitenoise/
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
-FACEBOOK_APP_ID = os.getenv("FACEBOOK_APP_ID", "1765073177112580")
-FACEBOOK_APP_SECRET = os.getenv("FACEBOOK_APP_SECRET", "02cd9eed57a406b18c24b2e9d11b4fc9")
-FACEBOOK_GROUP_ID = os.getenv("FACEBOOK_GROUP_ID", "1601597320127277")
+FACEBOOK_APP_ID = os.getenv("FACEBOOK_APP_ID")
+FACEBOOK_APP_SECRET = os.getenv("FACEBOOK_APP_SECRET")
+FACEBOOK_GROUP_ID = os.getenv("FACEBOOK_GROUP_ID")
 STATHAT_ACCOUNT = 'smuminov@gmail.com'
