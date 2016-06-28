@@ -158,6 +158,42 @@ def author_posts(request, author):
     }
     return render(request, 'author_posts.html', context)
 
+def group_facts(request):
+    cursor = connection.cursor()
+    cursor.execute("""
+    select
+      month,
+      (total::float / lag(total) over (order by month) - 1) * 100 growth
+      from (
+        select to_char(published, 'yyyy-mm') as month,
+        count(shares) total
+        from core_post
+        group by month
+      ) s
+      order by month;
+    """)
+    result = cursor.fetchone()[0]
+    context = {
+        'group_facts': result
+    }
+    return render(request, 'group_facts.html', context)
+
+def facts():
+    cursor = connection.cursor()
+    cursor.execute("""
+    select
+      month,
+      (total::float / lag(total) over (order by month) - 1) * 100 growth
+      from (
+        select to_char(published, 'yyyy-mm') as month,
+        count(shares) total
+        from core_post
+        group by month
+      ) s
+      order by month;
+    """)
+    return cursor.fetchall()
+
 
 def not_found(request):
     return render(request, '404.html')
