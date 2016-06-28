@@ -5,8 +5,24 @@
 
 {% block content %}
 
+<h3>Ойлар бўйича статистика</h3>
+
+<h4>Постлар</h4>
+<div id="monthly_posts" style="height: 250px;"></div>
+
+<h4>Изоҳлар</h4>
+<div id="monthly_comments" style="height: 250px;"></div>
+
+<h4>Улашишлар</h4>
+<div id="monthly_shares" style="height: 250px;"></div>
+
+<h4>Лайклар</h4>
+<div id="monthly_likes" style="height: 250px;"></div>
+
+<br/>
+<br/>
+
 <div class="container">
-    <h3>Ойлик статистика</h3>
     <table class="table table-condensed table-hover">
         <thead>
             <tr>
@@ -50,4 +66,74 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+<script type="text/javascript">
+Morris.Bar({
+    element: 'monthly_posts',
+    data: [
+    {% for this_month in posts_per_month %}
+      {year: '{{ this_month.month|date:"m-Y"|uzbekify_monthyear }}', posts: {{ this_month.posts }} },
+    {% endfor %}
+    ],
+    xkey: 'year',
+    ykeys: ['posts'],
+    labels: ['Постлар сони'],
+    barRatio: 0.2,
+    barColors: ['#2980b9'],
+    xLabelAngle: 15,
+    hideHover: 'auto',
+    gridTextFamily: 'Noto Serif',
+    gridTextSize: 10
+  });
+Morris.Bar({
+    element: 'monthly_comments',
+    data: [
+    {% for this_month in posts_per_month %}
+      {year: '{{ this_month.month|date:"m-Y"|uzbekify_monthyear }}', comments: {{ this_month.comments }} },
+    {% endfor %}
+    ],
+    xkey: 'year',
+    ykeys: ['comments'],
+    labels: ['Изоҳлар сони'],
+    barRatio: 0.2,
+    barColors: ['#16a085'],
+    xLabelAngle: 15,
+    hideHover: 'auto',
+    gridTextFamily: 'Noto Serif',
+    gridTextSize: 10
+  });
+Morris.Bar({
+    element: 'monthly_shares',
+    data: [
+    {% for this_month in posts_per_month %}
+      {year: '{{ this_month.month|date:"m-Y"|uzbekify_monthyear }}', shares: {{ this_month.shares }} },
+    {% endfor %}
+    ],
+    xkey: 'year',
+    ykeys: ['shares'],
+    labels: ['Улашишлар сони'],
+    barRatio: 0.2,
+    barColors: ['#8e44ad'],
+    xLabelAngle: 15,
+    hideHover: 'auto',
+    gridTextFamily: 'Noto Serif',
+    gridTextSize: 10
+  });
+Morris.Bar({
+    element: 'monthly_likes',
+    data: [
+    {% for this_month in posts_per_month %}
+      {year: '{{ this_month.month|date:"m-Y"|uzbekify_monthyear }}', likes: {{ this_month.likes }} },
+    {% endfor %}
+    ],
+    xkey: 'year',
+    ykeys: ['likes'],
+    labels: ['Лайклар сони'],
+    barRatio: 0.2,
+    barColors: ['#d35400'],
+    xLabelAngle: 15,
+    hideHover: 'auto',
+    gridTextFamily: 'Noto Serif',
+    gridTextSize: 10
+  });
+</script>
 {% endblock %}

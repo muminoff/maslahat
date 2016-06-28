@@ -14,13 +14,13 @@ def menu(request):
             'title': _('Статистика'),
             'dropdown': OrderedDict([
                 ('stat_yearly', {
-                    'title': _('Йиллик'),
+                    'title': _('Йиллар бўйича'),
                 }),
                 ('stat_monthly', {
-                    'title': _('Ойлик'),
+                    'title': _('Ойлар бўйича'),
                 }),
                 ('stat_weekdays', {
-                    'title': _('Ҳафталик'),
+                    'title': _('Ҳафта кунлари бўйича'),
                 }),
             ]),
         }),
