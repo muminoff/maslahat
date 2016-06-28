@@ -155,7 +155,7 @@ def author_posts(request, author):
     context = {
         'posts': Post.objects.filter(author=author).order_by('-published'),
         'author': author,
-        'author_id': Post.objects.get(author=author)[0].author_id,
+        'author_id': Post.objects.filter(author=author)[0].author_id,
     }
     return render(request, 'author_posts.html', context)
 
