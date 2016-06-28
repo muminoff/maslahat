@@ -158,7 +158,16 @@ def author_posts(request, author):
     }
     return render(request, 'author_posts.html', context)
 
+def dictfetchall(cursor):
+    "Return all rows from a cursor as a dict"
+    columns = [col[0] for col in cursor.description]
+    return [
+        dict(zip(columns, row))
+        for row in cursor.fetchall()
+    ]
+
 def group_facts(request):
+    import psycopg2
     cursor = connection.cursor()
     cursor.execute("""
     select
@@ -172,27 +181,11 @@ def group_facts(request):
       ) s
       order by month;
     """)
-    result = cursor.fetchone()[0]
+    result = dictfetchall(cursor)
     context = {
         'group_facts': result
     }
     return render(request, 'group_facts.html', context)
-
-def facts():
-    cursor = connection.cursor()
-    cursor.execute("""
-    select
-      month,
-      (total::float / lag(total) over (order by month) - 1) * 100 growth
-      from (
-        select to_char(published, 'yyyy-mm') as month,
-        count(shares) total
-        from core_post
-        group by month
-      ) s
-      order by month;
-    """)
-    return cursor.fetchall()
 
 
 def not_found(request):

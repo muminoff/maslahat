@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load localize_time %}
+{% load cache %}
+
+{% block content %}
+
+<div class="container">
+    <h3>Гуруҳнинг фаоллик даражаси <small>ойлар бўйича</small></h3>
+    <table class="table table-condensed table-hover">
+        <thead>
+            <tr>
+                <th>Ойлар</th>
+                <th>Фаоллик даражаси</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for fact in group_facts %}
+            <tr>
+                <td>{{ fact.month }}</td>
+                <td>{{ fact.growth|floatformat|default:'-' }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

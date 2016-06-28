@@ -41,6 +41,14 @@ def menu(request):
                 }),
             ]),
         }),
+        ('facts', {
+            'title': _('Фактлар'),
+            'dropdown': OrderedDict([
+                ('group_facts', {
+                    'title': _('Гуруҳ фаолияти'),
+                }),
+            ]),
+        }),
         ('about', {
             'title': _('Лойиҳа ҳақида'),
         }),
