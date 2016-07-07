@@ -156,11 +156,11 @@ def search(request):
     return render(request, 'search.html', context)
 
 
-def author_posts(request, author):
+def author_posts(request, author_id):
     context = {
-        'posts': Post.objects.filter(author=author).order_by('-published'),
-        'author': author,
-        'author_id': Post.objects.filter(author=author)[0].author_id,
+        'posts': Post.objects.filter(
+            author_id=author_id).order_by('-published'),
+        'author': Post.objects.filter(author_id=author_id)[0].author,
     }
     return render(request, 'author_posts.html', context)
 
