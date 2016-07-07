@@ -15,6 +15,9 @@ except ImportError:
 import json
 import datetime
 import time
+import pickle
+from urllib.parse import urlparse
+redis_url = urlparse(os.environ.get('REDIS_URL'))
 
 
 class Command(BaseCommand):
@@ -23,6 +26,11 @@ class Command(BaseCommand):
     group_id = settings.FACEBOOK_GROUP_ID
     access_token = settings.FACEBOOK_APP_ID + \
         "|" + settings.FACEBOOK_APP_SECRET
+    r = redis.StrictRedis(
+        host=redis_url.hostname,
+        port=redis_url.port,
+        db=0,
+        password=redis_url.password)
 
     def handle(self, *args, **options):
         # self.stdout.write(self.style.ERROR(_l(self.access_token)))
@@ -146,3 +154,4 @@ class Command(BaseCommand):
 
         text = "\nDone!\n%s posts processed in %s" % (num_processed, datetime.datetime.now() - scrape_starttime)  # noqa
         self.stdout.write(self.style.SUCCESS(text))
+        self.r.set('last_updated', pickle.dumps(timezone.now()))

@@ -15,6 +15,7 @@ from .models import Post
 import redis
 import sys
 import os
+import pickle
 from urllib.parse import urlparse
 redis_url = urlparse(os.environ.get('REDIS_URL'))
 
@@ -136,6 +137,7 @@ def about(request):
         'django_version': django.get_version(),
         'postgre_version': get_postgre_version(),
         'redis_version': get_redis_version(),
+        'last_updated': pickle.loads(get_last_updated()),
     }
     return render(request, 'about.html', context)
 
@@ -214,3 +216,16 @@ def get_redis_version():
         db=0,
         password=redis_url.password)
     return r.info()['redis_version']
+
+def get_last_updated():
+    r = redis.StrictRedis(
+        host=redis_url.hostname,
+        port=redis_url.port,
+        db=0,
+        password=redis_url.password)
+    ret = r.get('last_updated')
+
+    if not ret:
+        return pickle.dumps(timezone.now())
+
+    return ret
