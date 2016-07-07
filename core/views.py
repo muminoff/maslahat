@@ -161,6 +161,7 @@ def author_posts(request, author_id):
         'posts': Post.objects.filter(
             author_id=author_id).order_by('-published'),
         'author': Post.objects.filter(author_id=author_id)[0].author,
+        'author_id': author_id,
     }
     return render(request, 'author_posts.html', context)
 
