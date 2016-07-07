@@ -22,6 +22,9 @@ redis_url = urlparse(os.environ.get('REDIS_URL'))
 # Stathat
 from stathat import StatHat
 
+# Hashids
+from hashids import Hashids
+
 
 def stat_yearly(request):
     context = {
@@ -156,7 +159,11 @@ def search(request):
     return render(request, 'search.html', context)
 
 
-def author_posts(request, author_id):
+def author_posts(request, hashid):
+    hashids = Hashids(salt=settings.SECRET_KEY)
+    author_id = hashids.decode(str(hashid))[0]
+    print('hashid ->', hashid)
+    print('author_id ->', author_id)
     context = {
         'posts': Post.objects.filter(
             author_id=author_id).order_by('-published'),
