@@ -135,7 +135,7 @@ def about(request):
     context = {
         'python_version': get_python_version(),
         'django_version': django.get_version(),
-        'postgre_version': get_postgre_version(),
+        'postgres_version': get_postgres_version(),
         'redis_version': get_redis_version(),
         'last_updated': pickle.loads(get_last_updated()),
     }
@@ -204,7 +204,7 @@ def server_error(request):
 def get_python_version():
     return sys.version
 
-def get_postgre_version():
+def get_postgres_version():
     cursor = connection.cursor()
     cursor.execute("SELECT version();")
     return cursor.fetchone()[0]
