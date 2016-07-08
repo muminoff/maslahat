@@ -40,6 +40,8 @@
                 <td>{{ post.sads }}</td>
                 <td>{{ post.angrys }}</td>
             </tr>
+            {% empty %}
+            <p>Бугун янги постлар ёзилганича йўқ ҳали...</p>
             {% endfor %}
             {% endcache %}
         </tbody>
