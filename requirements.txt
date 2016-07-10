@@ -6,3 +6,4 @@ whitenoise
 cryptography
 django-redis-cache
 hashids
+requests

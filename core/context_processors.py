@@ -44,8 +44,11 @@ def menu(request):
         ('facts', {
             'title': _('Фактлар'),
             'dropdown': OrderedDict([
-                ('group_facts', {
-                    'title': _('Гуруҳ фаолияти'),
+                ('group_activity', {
+                    'title': _('Гуруҳ фаоллиги'),
+                }),
+                ('group_growth', {
+                    'title': _('Гуруҳнинг ўсиши'),
                 }),
             ]),
         }),
