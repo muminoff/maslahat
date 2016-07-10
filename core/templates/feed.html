@@ -24,7 +24,6 @@
             </tr>
         </thead>
         <tbody>
-            {% cache 3600 new_posts %}
             {% for post in new_posts %}
             <tr>
                 <td><a href="http://fb.com/{{ post.id }}" target="_blank">{{ post.text|truncatechars:32 }}</a></td>
@@ -41,11 +40,10 @@
                 <td>{{ post.angrys }}</td>
             </tr>
             {% empty %}
-            <tr>
+            <tr colspan="12">
               <td>Бугун янги постлар ёзилганича йўқ ҳали...</td>
             </tr>
             {% endfor %}
-            {% endcache %}
         </tbody>
     </table>
 </div>
