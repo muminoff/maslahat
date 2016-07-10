@@ -18,6 +18,7 @@ import time
 import pickle
 import os
 from urllib.parse import urlparse
+import redis
 redis_url = urlparse(os.environ.get('REDIS_URL'))
 
 
