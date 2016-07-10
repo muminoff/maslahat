@@ -47,9 +47,9 @@ def menu(request):
                 ('group_activity', {
                     'title': _('Гуруҳ фаоллиги'),
                 }),
-                ('group_growth', {
-                    'title': _('Гуруҳнинг ўсиши'),
-                }),
+                # ('group_growth', {
+                #     'title': _('Гуруҳнинг ўсиши'),
+                # }),
             ]),
         }),
         ('about', {
