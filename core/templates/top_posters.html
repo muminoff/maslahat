@@ -30,7 +30,7 @@
             {% for poster in top_posters %}
             <tr>
                 <td>{{ forloop.counter }}.</td>
-                <td><img src="https://graph.facebook.com/{{ poster.author_id }}/picture?type=square&width=24&height=24"/> {{ poster.author }} </td>
+                <td><img src="https://graph.facebook.com/{{ poster.author_id }}/picture?type=square&width=24&height=24"/>&nbsp;{{ poster.author }} </td>
                 <td><a href="{% url "author_posts" poster.author_id|make_maslahat_id %}" class="btn btn-xs btn-primary">постлар</a></td>
                 <td>{{ poster.times }}</td>
                 <td>{{ poster.comments }}</td>
