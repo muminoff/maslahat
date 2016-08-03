@@ -7,3 +7,4 @@ cryptography
 django-redis-cache
 hashids
 requests
+django-htmlmin
