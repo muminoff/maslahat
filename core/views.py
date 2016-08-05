@@ -185,19 +185,35 @@ def group_activity(request):
     cursor = connection.cursor()
     cursor.execute("""
     select
-      month,
+      m, y,
       (total_shares::float / lag(total_shares) over (order by month) - 1) * 100 share_degree,
       (total_reactions::float / lag(total_reactions) over (order by month) - 1) * 100 reaction_degree,
       (total_comments::float / lag(total_comments) over (order by month) - 1) * 100 comment_degree
       from (
-        select to_char(published, 'mm-yyyy') as month,
+        select extract(month from published) as m,
+        extract(year from published) as y,
+        to_char(published, 'mm-yyyy') as month,
         sum(shares) total_shares,
         sum(reactions) total_reactions,
         sum(comments) total_comments
         from core_post
-        group by month
+        group by m, y, month
       ) s
-      order by month desc;
+      order by y, m asc;
+    # select
+    #   month,
+    #   (total_shares::float / lag(total_shares) over (order by month) - 1) * 100 share_degree,
+    #   (total_reactions::float / lag(total_reactions) over (order by month) - 1) * 100 reaction_degree,
+    #   (total_comments::float / lag(total_comments) over (order by month) - 1) * 100 comment_degree
+    #   from (
+    #     select to_char(published, 'mm-yyyy') as month,
+    #     sum(shares) total_shares,
+    #     sum(reactions) total_reactions,
+    #     sum(comments) total_comments
+    #     from core_post
+    #     group by month
+    #   ) s
+    #   order by month desc;
     """)
     group_activity = dictfetchall(cursor)
     context = {
