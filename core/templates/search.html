@@ -32,7 +32,7 @@
                   {% localtime on %}
                   <td>{{ post.published|date:"d-m-Y H:i" }}</td>
                   {% endlocaltime %}
-                  <td><img src="//graph.facebook.com/{{ post.author_id }}/picture?type=square&width=24&height=24"/> {{ post.author }}</td>
+                  <td><img src="//graph.facebook.com/{{ post.author_id }}/picture?type=square&width=24&height=24"/>&nbsp;{{ post.author }}</td>
                   <td>{{ post.comments }}</td>
                   <td>{{ post.reactions }}</td>
                   <td>{{ post.shares }}</td>
