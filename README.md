@@ -24,15 +24,21 @@ Facebook developer консолидан `FACEBOOK_APP_ID` ва `FACEBOOK_APP_SEC
 
 Қуйидаги буйруқларни кетма-кетликда бажаринг.
 
-  1. `git clone https://github.com/muminoff/maslahat.git`
-  2. `virtualenv env && source env/bin/activate.sh`
-  3. `pip install -r requirements.txt`
-  4. `createuser -s maslahat`
-  5. `createdb -O maslahat maslahat`
-  6. `python manage.py migrate`
-  7. `python manage.py collectstatic --noinput`
-  8. `python manage.py import`
-  9. `python manage.py runserver`
+```
+$ git clone https://github.com/muminoff/maslahat.git
+$ virtualenv env && source env/bin/activate.sh
+$ pip install -r requirements.txt
+$ createuser -s maslahat
+$ createdb -O maslahat maslahat
+$ export FACEBOOK_APP_ID='__FACEBOOKДАН_ОЛИНГАН__'
+$ export FACEBOOK_APP_SECRET='__FACEBOOKДАН_ОЛИНГАН__'
+$ export FACEBOOK_GROUP_ID=1601597320127277
+$ vim maslahat/settings.py # Керакли созламаларни киритинг
+$ python manage.py migrate
+$ python manage.py collectstatic --noinput
+$ python manage.py import
+$ python manage.py runserver
+```
 
 
 ### Disclaimer
