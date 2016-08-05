@@ -92,28 +92,28 @@ def top_posters(request):
             wows=Sum('wows'),
             hahas=Sum('hahas'),
             sads=Sum('sads'),
-            angrys=Sum('angrys')).order_by('-times')[:20]
+            angrys=Sum('angrys')).order_by('-times')[:50]
     }
     return render(request, 'top_posters.html', context)
 
 
 def top_shared_posts(request):
     context = {
-        'top_shared_posts': Post.objects.order_by('-shares')[:20]
+        'top_shared_posts': Post.objects.order_by('-shares')[:50]
     }
     return render(request, 'top_shared_posts.html', context)
 
 
 def top_commented_posts(request):
     context = {
-        'top_commented_posts': Post.objects.order_by('-comments')[:20]
+        'top_commented_posts': Post.objects.order_by('-comments')[:50]
     }
     return render(request, 'top_commented_posts.html', context)
 
 
 def top_liked_posts(request):
     context = {
-        'top_liked_posts': Post.objects.order_by('-likes')[:20]
+        'top_liked_posts': Post.objects.order_by('-likes')[:50]
     }
     return render(request, 'top_liked_posts.html', context)
 
