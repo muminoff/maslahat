@@ -136,6 +136,7 @@ def feed(request):
 
 def about(request):
     context = {
+        'os_info': get_os_info(),
         'python_version': get_python_version(),
         'django_version': django.get_version(),
         'postgres_version': get_postgres_version(),
@@ -235,6 +236,9 @@ def not_found(request):
 
 def server_error(request):
     return render(request, '500.html')
+
+def get_os_info():
+    return platform.platform()
 
 def get_python_version():
     return sys.version
