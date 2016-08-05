@@ -197,7 +197,7 @@ def group_activity(request):
         from core_post
         group by month
       ) s
-      order by month;
+      order by month desc;
     """)
     group_activity = dictfetchall(cursor)
     context = {
