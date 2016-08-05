@@ -185,7 +185,7 @@ def group_activity(request):
     cursor = connection.cursor()
     cursor.execute("""
     select
-      m, y, month
+      m, y, month,
       (total_shares::float / lag(total_shares) over (order by month) - 1) * 100 share_degree,
       (total_reactions::float / lag(total_reactions) over (order by month) - 1) * 100 reaction_degree,
       (total_comments::float / lag(total_comments) over (order by month) - 1) * 100 comment_degree
