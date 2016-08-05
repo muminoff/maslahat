@@ -238,6 +238,7 @@ def server_error(request):
     return render(request, '500.html')
 
 def get_os_info():
+    import platform
     return platform.platform()
 
 def get_python_version():
