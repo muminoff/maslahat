@@ -200,6 +200,7 @@ def group_activity(request):
         group by m, y, month
       ) s
       order by y, m asc;
+    """)
     # select
     #   month,
     #   (total_shares::float / lag(total_shares) over (order by month) - 1) * 100 share_degree,
@@ -214,7 +215,6 @@ def group_activity(request):
     #     group by month
     #   ) s
     #   order by month desc;
-    """)
     group_activity = dictfetchall(cursor)
     context = {
         'group_activity': group_activity
