@@ -6,8 +6,13 @@
 {% block content %}
 
 <div class="container">
-    <h3>Гуруҳнинг ўсиш даражаси <small>ойлар бўйича</small></h3>
-    <div id="group_growth" style="height: 250px;"></div>
+    <h2>Гуруҳнинг ўсиш даражаси <small>ойлар бўйича</small></h2>
+    <h3>Муносабатлар нисбати бўйича</h3>
+    <div id="reactions_facts" style="height: 250px;"></div>
+    <h3>Изоҳлар нисбати бўйича</h3>
+    <div id="comments_facts" style="height: 250px;"></div>
+    <h3>Улашишлар нисбати бўйича</h3>
+    <div id="shares_facts" style="height: 250px;"></div>
 </div>
 {% endblock %}
 {% block javascript %}
@@ -16,7 +21,15 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 <script type="text/javascript">
-var fact_data = [
+var reactions_fact_data = [
+{% for fact in reactions_facts %}
+    {
+        month: "{{ fact.month }}",
+        reactions: {{ fact.reactions }},
+    },
+{% endfor %}
+];
+var comments_fact_data = [
 {% for fact in comments_facts %}
     {
         month: "{{ fact.month }}",
@@ -24,12 +37,34 @@ var fact_data = [
     },
 {% endfor %}
 ];
+var shares_facts_data = [
+{% for fact in shares_facts %}
+    {
+        month: "{{ fact.month }}",
+        shares: {{ fact.shares }},
+    },
+{% endfor %}
+];
 Morris.Bar({
-  element: 'group_growth',
-  data: fact_data,
+  element: 'reactions_facts',
+  data: reactions_fact_data,
+  xkey: 'month',
+  ykeys: ['reactions'],
+  labels: ['Муносабатлар'],
+});
+Morris.Bar({
+  element: 'comments_facts',
+  data: comments_fact_data,
   xkey: 'month',
   ykeys: ['comments'],
   labels: ['Изоҳлар'],
+});
+Morris.Bar({
+  element: 'shares_facts',
+  data: shares_facts_data,
+  xkey: 'month',
+  ykeys: ['shares'],
+  labels: ['Улашишлар'],
 });
 </script>
 {% endblock %}
