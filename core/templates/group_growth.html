@@ -24,7 +24,7 @@
 var reactions_fact_data = [
 {% for fact in reactions_facts %}
     {
-        month: "{{ fact.month }}",
+        month: "{{ fact.month|uzbekify_monthyear }}",
         reactions: {{ fact.reactions }},
     },
 {% endfor %}
@@ -32,7 +32,7 @@ var reactions_fact_data = [
 var comments_fact_data = [
 {% for fact in comments_facts %}
     {
-        month: "{{ fact.month }}",
+        month: "{{ fact.month|uzbekify_monthyear }}",
         comments: {{ fact.comments }},
     },
 {% endfor %}
@@ -40,7 +40,7 @@ var comments_fact_data = [
 var shares_facts_data = [
 {% for fact in shares_facts %}
     {
-        month: "{{ fact.month }}",
+        month: "{{ fact.month|uzbekify_monthyear }}",
         shares: {{ fact.shares }},
     },
 {% endfor %}
