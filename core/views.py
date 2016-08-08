@@ -200,7 +200,7 @@ def group_activity(request):
         from core_post
         group by m, y, month
       ) s
-      order by y, m asc;
+    order by y, m asc;
     """)
     group_activity = dictfetchall(cursor)
     context = {
@@ -211,21 +211,53 @@ def group_activity(request):
 def group_growth(request):
     import psycopg2
     cursor = connection.cursor()
+
     cursor.execute("""
-    select
-      month,
-      (total::float / lag(total) over (order by month) - 1) * 100 growth
-      from (
-        select to_char(published, 'yyyy-mm') as month,
-        count(shares) total
-        from core_post
-        group by month
-      ) s
-      order by month;
+    select month, sum(total_reactions) over (order by month) from (
+    select month, total_reactions
+    from (
+      select to_char(published, 'yyyy-mm') as month,
+      sum(reactions) total_reactions
+      from core_post
+      group by month
+    ) s
+    order by month
+    ) reactions_growth;
     """)
-    result = dictfetchall(cursor)
+    reactions_facts = dictfetchall(cursor)
+
+    cursor.execute("""
+    select month, sum(total_comments) as comments over (order by month) from (
+    select month, total_comments
+    from (
+      select to_char(published, 'yyyy-mm') as month,
+      sum(comments) total_comments
+      from core_post
+      group by month
+    ) s
+    order by month
+    ) comments_growth;
+    """)
+    comments_facts = dictfetchall(cursor)
+
+    cursor.execute("""
+    select month, sum(total_shares) as shares over (order by month) from (
+    select month, total_shares
+    from (
+      select to_char(published, 'yyyy-mm') as month,
+      sum(shares) total_shares
+      from core_post
+      group by month
+    ) s
+    order by month
+    ) shares_growth;
+    """)
+    shares_facts = dictfetchall(cursor)
+
     context = {
-        'group_facts': result
+        'reactions_facts': reactions_facts,
+        'comments_facts': comments_facts,
+        'shares_facts': shares_facts
     }
     return render(request, 'group_growth.html', context)
 

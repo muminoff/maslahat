@@ -17,7 +17,7 @@ urlpatterns = [
     url(r'^top/commented/posts/$', core.views.top_commented_posts, name='top_commented_posts'),
     url(r'^top/liked/posts/$', core.views.top_liked_posts, name='top_liked_posts'),
     url(r'^facts/activity/$', core.views.group_activity, name='group_activity'),
-    # url(r'^facts/growth/$', core.views.group_growth, name='group_growth'),
+    url(r'^facts/growth/$', core.views.group_growth, name='group_growth'),
 ]
 
 handler404 = 'core.views.not_found'

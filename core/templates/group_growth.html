@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load localize_time %}
+{% load cache %}
+
+{% block content %}
+
+<div class="container">
+    <h3>Гуруҳнинг ўсиш даражаси <small>ойлар бўйича</small></h3>
+    <div id="group_growth" style="height: 250px;"></div>
+</div>
+{% endblock %}
+{% block javascript %}
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+<script type="text/javascript">
+var fact_data = [
+{% for fact in comments_facts %}
+    {
+        month: "{{ fact.month|uzbekify_monthyear }}",
+        comments: {{ fact.comments }},
+    },
+{% endfor %}
+];
+Morris.Bar({
+  element: 'group_growth',
+  data: fact_data,
+  xkey: 'month',
+  ykeys: ['comments'],
+  labels: ['Изоҳлар'],
+});
+</script>
+{% endblock %}
