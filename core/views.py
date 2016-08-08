@@ -227,7 +227,7 @@ def group_growth(request):
     reactions_facts = dictfetchall(cursor)
 
     cursor.execute("""
-    select month, sum(total_comments) as comments over (order by month) from (
+    select month, sum(total_comments) over (order by month) as comments from (
     select month, total_comments
     from (
       select to_char(published, 'yyyy-mm') as month,
