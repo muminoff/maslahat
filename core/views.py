@@ -216,7 +216,7 @@ def group_growth(request):
     select month, sum(total_reactions) over (order by month) as reactions from (
     select month, total_reactions
     from (
-      select to_char(published, 'yyyy-mm') as month,
+      select to_char(published, 'mm-yyyy') as month,
       sum(reactions) total_reactions
       from core_post
       group by month
@@ -230,7 +230,7 @@ def group_growth(request):
     select month, sum(total_comments) over (order by month) as comments from (
     select month, total_comments
     from (
-      select to_char(published, 'yyyy-mm') as month,
+      select to_char(published, 'mm-yyyy') as month,
       sum(comments) total_comments
       from core_post
       group by month
@@ -244,7 +244,7 @@ def group_growth(request):
     select month, sum(total_shares) over (order by month) as shares from (
     select month, total_shares
     from (
-      select to_char(published, 'yyyy-mm') as month,
+      select to_char(published, 'mm-yyyy') as month,
       sum(shares) total_shares
       from core_post
       group by month
