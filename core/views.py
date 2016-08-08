@@ -213,7 +213,7 @@ def group_growth(request):
     cursor = connection.cursor()
 
     cursor.execute("""
-    select month, sum(total_reactions) over (order by month) from (
+    select month, sum(total_reactions) over (order by month) as reactions from (
     select month, total_reactions
     from (
       select to_char(published, 'yyyy-mm') as month,
@@ -241,7 +241,7 @@ def group_growth(request):
     comments_facts = dictfetchall(cursor)
 
     cursor.execute("""
-    select month, sum(total_shares) as shares over (order by month) from (
+    select month, sum(total_shares) over (order by month) as shares from (
     select month, total_shares
     from (
       select to_char(published, 'yyyy-mm') as month,
