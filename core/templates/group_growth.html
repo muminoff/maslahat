@@ -19,7 +19,7 @@
 var fact_data = [
 {% for fact in comments_facts %}
     {
-        month: "{{ fact.month|uzbekify_monthyear }}",
+        month: "{{ fact.month }}",
         comments: {{ fact.comments }},
     },
 {% endfor %}
