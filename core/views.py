@@ -213,43 +213,49 @@ def group_growth(request):
     cursor = connection.cursor()
 
     cursor.execute("""
-    select month, sum(total_reactions) over (order by month) as reactions from (
-    select month, total_reactions
-    from (
-      select to_char(published, 'mm-yyyy') as month,
-      sum(reactions) total_reactions
-      from core_post
-      group by month
-    ) s
-    order by month
+    select month, mmonth, yyear, sum(total_reactions) over (order by yyear, mmonth) as reactions from (
+	select month, mmonth, yyear, total_reactions
+	from (
+	    select to_char(published, 'mm-yyyy') as month,
+	    extract(year from published) as yyear,
+	    extract(month from published) as mmonth,
+	    sum(reactions) total_reactions
+	    from core_post
+	    group by month, yyear, mmonth
+	    order by yyear asc, mmonth asc
+	) s
     ) reactions_growth;
     """)
     reactions_facts = dictfetchall(cursor)
 
     cursor.execute("""
-    select month, sum(total_comments) over (order by month) as comments from (
-    select month, total_comments
-    from (
-      select to_char(published, 'mm-yyyy') as month,
-      sum(comments) total_comments
-      from core_post
-      group by month
-    ) s
-    order by month
+    select month, mmonth, yyear, sum(total_comments) over (order by yyear, mmonth) as comments from (
+	select month, mmonth, yyear, total_comments
+	from (
+	    select to_char(published, 'mm-yyyy') as month,
+	    extract(year from published) as yyear,
+	    extract(month from published) as mmonth,
+	    sum(comments) total_comments
+	    from core_post
+	    group by month, yyear, mmonth
+	    order by yyear asc, mmonth asc
+	) s
     ) comments_growth;
     """)
     comments_facts = dictfetchall(cursor)
 
     cursor.execute("""
-    select month, sum(total_shares) over (order by month) as shares from (
-    select month, total_shares
-    from (
-      select to_char(published, 'mm-yyyy') as month,
-      sum(shares) total_shares
-      from core_post
-      group by month
-    ) s
-    order by month
+    select month, mmonth, yyear, sum(total_shares) over (order by yyear, mmonth) as shares from (
+	select month, mmonth, yyear, total_shares
+	from (
+	    select to_char(published, 'mm-yyyy') as month,
+	    extract(year from published) as yyear,
+	    extract(month from published) as mmonth,
+	    sum(shares) total_shares
+	    from core_post
+	    group by month, yyear, mmonth
+	    order by yyear asc, mmonth asc
+	) s
     ) shares_growth;
     """)
     shares_facts = dictfetchall(cursor)
