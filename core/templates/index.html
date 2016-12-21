@@ -33,14 +33,10 @@
     })
 
   theater
-  {% for post in new_posts %}
-    .addActor('{{ post.author_id }}')
-  {% endfor %}
+    .addActor('{{ last_post.author }}')
 
   theater
-  {% for post in new_posts %}
-    .addScene('{{ post.author_id}}:{{ post.text|linebreaksbr }}', 400)
-  {% endfor %}
+    .addScene('{{ last_post.author}}:{{ last_post.text|linebreaksbr }}', 400)
     .addScene(theater.replay)
 </script>
 {% endblock %}

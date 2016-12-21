@@ -123,7 +123,7 @@ def index(request):
     stats = StatHat(settings.STATHAT_ACCOUNT)
     stats.count('user.visited', 1)
     context = {
-        'new_posts': Post.objects.order_by('-published')[:10]
+        'last_post': Post.objects.last()
     }
     return render(request, 'index.html', context)
 
