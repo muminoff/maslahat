@@ -8,9 +8,7 @@
     <img src="//d13yacurqjgara.cloudfront.net/users/607375/screenshots/2740815/maslahatuz_1x.jpg"/>
   <h3>Сайт фаол тарзда янгиланиб бориляпти. Тез кунларда янги кўринишда ишга тушади.</h3>
   <p>Сайтда яна қандай функциялар бўлишини истар эдингиз? <strong>Бу ҳақда дастурчига <a href="https://telegram.me/crispybone" target="_blank">хабар беринг</a>.</strong></p>
-  {% for post in new_posts %}
-  <div id="{{ post.author_id }}"></div>
-  {% endfor %}
+  <div id="author"></div>
   </div>
 </div>
 {% endblock %}
@@ -33,10 +31,10 @@
     })
 
   theater
-    .addActor('{{ last_post.author }}')
+    .addActor('author')
 
   theater
-    .addScene('{{ last_post.author}}:{{ last_post.text|linebreaksbr }}', 400)
+    .addScene('author:{{ last_post.text|linebreaksbr }}', 400)
     .addScene(theater.replay)
 </script>
 {% endblock %}
