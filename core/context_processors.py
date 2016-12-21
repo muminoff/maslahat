@@ -1,5 +1,6 @@
 #! -*- coding: utf-8 -*-
 from django.utils.translation import ugettext_lazy as _
+from django.urls import reverse
 from collections import OrderedDict
 
 
@@ -58,19 +59,15 @@ def menu(request):
     ])
 
     for k, v in main_menu.items():
-        path = '/{}/'.format(k)
 
-        if request.path.endswith(path):
+        if reverse(k) == request.path:
             v['active'] = True
             title = v['title']
 
         if 'dropdown' in v:
             for sk, sv in v['dropdown'].items():
-                # subpath = '{}{}/'.format(path, sk)  # old code
-                subpath = '/{}/'.format(sk)
 
-                if request.path.endswith(subpath):
-                    print(request.path, subpath)
+                if reverse(sk) == request.path:
                     sv['active'] = True
                     title = sv['title']
 
