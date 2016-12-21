@@ -10,18 +10,11 @@
   <p>Сайтда яна қандай функциялар бўлишини истар эдингиз? <strong>Бу ҳақда дастурчига <a href="https://telegram.me/crispybone" target="_blank">хабар беринг</a>.</strong></p>
   <br/>
   <br/>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title"><img src="https://graph.facebook.com/{{ last_post.author_id }}/picture?type=square&width=32&height=32"/>&nbsp;<a href="http://fb.com/{{ last_post.id }}" target="_blank">{{ last_post.author }}</a></h3>
-    </div>
-    <div class="panel-body">
-      <div id="author"></div>
-    </div>
-  </div>
+  <div id="stat"></div>
   </div>
 </div>
 {% endblock %}
 {% block javascript %}
 <script src="//www.stathat.com/js/embed.js"></script>
-<script>StatHatEmbed.render({s1: 'undefined', w: 760, h: 235});</script>
+<script>StatHatEmbed.render({s1: 'stat', w: 760, h: 235});</script>
 {% endblock %}
