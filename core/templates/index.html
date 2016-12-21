@@ -39,7 +39,7 @@
 
   theater
   {% for post in new_posts %}
-    .addScene('{{ post.author_id}}:{{ post.text }}', 400)
+    .addScene('{{ post.author_id}}:{{ post.text|linebreaksbr }}', 400)
   {% endfor %}
     .addScene(theater.replay)
 </script>
