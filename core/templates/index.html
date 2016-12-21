@@ -8,12 +8,13 @@
     <img src="//d13yacurqjgara.cloudfront.net/users/607375/screenshots/2740815/maslahatuz_1x.jpg"/>
   <h3>Сайт фаол тарзда янгиланиб бориляпти. Тез кунларда янги кўринишда ишга тушади.</h3>
   <p>Сайтда яна қандай функциялар бўлишини истар эдингиз? <strong>Бу ҳақда дастурчига <a href="https://telegram.me/crispybone" target="_blank">хабар беринг</a>.</strong></p>
+  {% for post in new_posts %}
+  <div id="{{ post.author_id }}"></div>
+  {% endfor %}
   </div>
 </div>
 {% endblock %}
 {% block javascript %}
-<div id="vader"></div>
-<div id="luke"></div>
 
 <script src="//cdn.jsdelivr.net/theaterjs/latest/theater.min.js"></script>
 <script>
@@ -32,14 +33,14 @@
     })
 
   theater
-    .addActor('vader')
-    .addActor('luke')
+  {% for post in new_posts %}
+    .addActor('{{ post.author_id }}')
+  {% endfor %}
 
   theater
-    .addScene('vader:Luke...', 400)
-    .addScene('luke:What?', 400)
-    .addScene('vader:I am', 200, '.', 200, '.', 200, '. ')
-    .addScene('Your father!')
+  {% for post in new_posts %}
+    .addScene('{{ post.author_id}}:{{ post.text }}', 400)
+  {% endfor %}
     .addScene(theater.replay)
 </script>
 {% endblock %}

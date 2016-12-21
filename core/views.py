@@ -122,7 +122,10 @@ def top_liked_posts(request):
 def index(request):
     stats = StatHat(settings.STATHAT_ACCOUNT)
     stats.count('user.visited', 1)
-    return render(request, 'index.html')
+    context = {
+        'new_posts': Post.objects.order_by('-published')[:10]
+    }
+    return render(request, 'index.html', context)
 
 
 def feed(request):
