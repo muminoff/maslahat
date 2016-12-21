@@ -26,7 +26,7 @@
         <tbody>
             {% for post in new_posts %}
             <tr>
-                <td><a href="http://fb.com/{{ post.id }}" target="_blank">{{ post.text|truncatewords:10 }}</a></td>
+                <td><a href="http://fb.com/{{ post.id }}" target="_blank">{{ post.text|truncatewords:7 }}</a></td>
                 <td>{{ post.published|date:"H:i" }}</td>
                 <td><img src="https://graph.facebook.com/{{ post.author_id }}/picture?type=square&width=24&height=24"/>&nbsp;{{ post.author }}</td>
                 <td>{{ post.comments }}</td>
