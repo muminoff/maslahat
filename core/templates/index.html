@@ -22,26 +22,6 @@
 </div>
 {% endblock %}
 {% block javascript %}
-
-<script src="//cdn.jsdelivr.net/theaterjs/latest/theater.min.js"></script>
-<script>
-  var theater = theaterJS()
-
-  theater
-    .on('type:start, erase:start', function () {
-      var actor = theater.getCurrentActor()
-      actor.$element.classList.add('is-typing')
-    })
-    .on('type:end, erase:end', function () {
-      var actor = theater.getCurrentActor()
-      actor.$element.classList.remove('is-typing')
-    })
-
-  theater
-    .addActor('author')
-
-  theater
-    .addScene('author:{{ last_post.text|linebreaksbr }}', 100)
-    .addScene(theater.replay)
-</script>
+<script src="//www.stathat.com/js/embed.js"></script>
+<script>StatHatEmbed.render({s1: 'undefined', w: 760, h: 235});</script>
 {% endblock %}
