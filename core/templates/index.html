@@ -8,7 +8,17 @@
     <img src="//d13yacurqjgara.cloudfront.net/users/607375/screenshots/2740815/maslahatuz_1x.jpg"/>
   <h3>Сайт фаол тарзда янгиланиб бориляпти. Тез кунларда янги кўринишда ишга тушади.</h3>
   <p>Сайтда яна қандай функциялар бўлишини истар эдингиз? <strong>Бу ҳақда дастурчига <a href="https://telegram.me/crispybone" target="_blank">хабар беринг</a>.</strong></p>
-  <div id="author"></div>
+  <br/>
+  <br/>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      
+      <h3 class="panel-title"><img src="https://graph.facebook.com/{{ last_post.author_id }}/picture?type=square&width=32&height=32"/>&nbsp;{{ post.author }}</h3>
+    </div>
+    <div class="panel-body">
+      <div id="author"></div>
+    </div>
+  </div>
   </div>
 </div>
 {% endblock %}
@@ -34,7 +44,7 @@
     .addActor('author')
 
   theater
-    .addScene('author:{{ last_post.text|linebreaksbr }}', 400)
+    .addScene('author:{{ last_post.text|linebreaksbr }}', 200)
     .addScene(theater.replay)
 </script>
 {% endblock %}
