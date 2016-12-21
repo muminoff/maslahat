@@ -35,7 +35,6 @@ class Command(BaseCommand):
         password=redis_url.password)
 
     def handle(self, *args, **options):
-        # self.stdout.write(self.style.ERROR(_l(self.access_token)))
         self.scrapeFacebookPageFeedStatus(self.group_id, self.access_token)
 
     def request_until_succeed(self, url):
@@ -58,7 +57,6 @@ class Command(BaseCommand):
         fields = "/?fields=message,link,created_time,type,name,id,comments.limit(0).summary(true),shares,reactions.limit(0).summary(true),from"  # noqa
         parameters = "&limit=%s&access_token=%s" % (num_statuses, access_token)
         url = base + node + fields + parameters
-        # data = json.loads(self.request_until_succeed(url))
         data = json.loads(self.request_until_succeed(url))
         return data
 
@@ -142,8 +140,6 @@ class Command(BaseCommand):
                             resp_data[0], datetime.datetime.now())
                     self.stdout.write(self.style.ERROR(text))
 
-                # text = "%s post processed: %s" % (resp_data[0], datetime.datetime.now())  # noqa
-                # self.stdout.write(self.style.SUCCESS(text))
                 num_processed += 1
                 if num_processed % 100 == 0:
                     text = "%s posts processed: %s" % (num_processed, datetime.datetime.now())  # noqa
