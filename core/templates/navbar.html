@@ -18,14 +18,14 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ v.title }}<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   {% for dk, dv in v.dropdown.items %}
-                  <li class="{% if dv.active %}active{% endif %}">
+                  <li{% if dv.active %} class="active"{% endif %}>
                       <a href="{% url dk %}">{{ dv.title }}</a>
                   </li>
                   {% endfor %}
                 </ul>
               </li>
               {% else %}
-              <li class="{% if v.active %}active{% endif %}"><a href="{% url k %}">{{ v.title }}</a></li>
+              <li{% if v.active %} class="active"{% endif %}><a href="{% url k %}">{{ v.title }}</a></li>
               {% endif %}
               {% endfor %}
               <form class="navbar-form navbar-left" role="search" action="{% url "search" %}">

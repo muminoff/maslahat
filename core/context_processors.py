@@ -60,8 +60,7 @@ def menu(request):
 
     for k, v in main_menu.items():
 
-        if reverse(k) == request.path or \
-                k in request.path:
+        if reverse(k) == request.path:
             v['active'] = True
             title = v['title']
 
@@ -69,6 +68,7 @@ def menu(request):
             for sk, sv in v['dropdown'].items():
 
                 if reverse(sk) == request.path:
+                    v['active'] = True
                     sv['active'] = True
                     title = sv['title']
 
