@@ -67,7 +67,7 @@ def menu(request):
 
         if 'dropdown' in v:
             for sk, sv in v['dropdown'].items():
-                print("================>", reverses(k))
+                print("================>", reverse(sk))
 
                 if reverse(sk) == request.path:
                     sv['active'] = True
