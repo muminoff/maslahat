@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from django.utils import timezone
 from django.conf import settings
 from django.db import connection
-from django.db.models import Count, Sum
+from django.db.models import Count, Sum, Q
 from django.db.models.functions import TruncYear, TruncMonth, ExtractWeekDay
 
 # Core
@@ -18,6 +18,7 @@ import os
 import pickle
 from urllib.parse import urlparse
 redis_url = urlparse(os.environ.get('REDIS_URL'))
+import itertools
 
 # Stathat
 from stathat import StatHat
@@ -144,16 +145,16 @@ def about(request):
 
 
 def search(request):
-    text = request.GET.get('text')
-    results = Post.objects.all()
+    q = request.GET.get('q', None)
+    results = list()
 
-    if text:
+    if q:
+        q = q.strip()
         results = Post.objects.filter(
-            text__icontains=text
-            ).order_by('-published')
-    else:
-        results = None
-    context = { 'results': results, 'text': text }
+            Q(text__icontains=q) |
+            Q(author__icontains=q)).order_by('-published')
+
+    context = { 'results': results, 'q': q }
     return render(request, 'search.html', context)
 
 
