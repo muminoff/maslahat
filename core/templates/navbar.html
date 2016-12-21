@@ -14,7 +14,7 @@
             <ul class="nav navbar-nav">
               {% for k, v in main_menu.items %}
               {% if v.dropdown %}
-              <li class="dropdown active">
+              <li class="dropdown{% if v.active %} active{% endif %}">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ v.title }}<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   {% for dk, dv in v.dropdown.items %}
