@@ -61,11 +61,13 @@ def menu(request):
     for k, v in main_menu.items():
 
         if reverse(k) == request.path:
+            print("================>", reverse(k))
             v['active'] = True
             title = v['title']
 
         if 'dropdown' in v:
             for sk, sv in v['dropdown'].items():
+                print("================>", reverses(k))
 
                 if reverse(sk) == request.path:
                     sv['active'] = True
