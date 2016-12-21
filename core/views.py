@@ -126,10 +126,7 @@ def index(request):
 
 def feed(request):
     context = {
-        'new_posts': Post.objects.filter(
-            published__year=timezone.now().year,
-            published__month=timezone.now().month,
-            published__day=timezone.now().day).order_by('-published')
+        'new_posts': Post.objects.order_by('-published')[:20]
     }
     return render(request, 'feed.html', context)
 
