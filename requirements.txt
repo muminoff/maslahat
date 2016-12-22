@@ -8,3 +8,4 @@ django-redis-cache
 hashids
 requests
 django-htmlmin
+pytz==2016.10
