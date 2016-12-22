@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 {% load cache %}
+{% load tz %}
 
 {% block content %}
 
@@ -27,7 +28,9 @@
             {% for post in new_posts %}
             <tr>
                 <td><a href="http://fb.com/{{ post.id }}" target="_blank">{{ post.text|truncatewords:7 }}</a></td>
+                {% localtime on %}
                 <td>{{ post.published|date:"H:i" }}</td>
+                {% endlocaltime %}
                 <td><img src="https://graph.facebook.com/{{ post.author_id }}/picture?type=square&width=24&height=24"/>&nbsp;{{ post.author }}</td>
                 <td>{{ post.comments }}</td>
                 <td>{{ post.reactions }}</td>
