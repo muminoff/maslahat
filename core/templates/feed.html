@@ -25,7 +25,6 @@
             </tr>
         </thead>
         <tbody>
-          TIMEZONE: {{ get_current_timezone }}
             {% for post in new_posts %}
             <tr>
                 <td><a href="http://fb.com/{{ post.id }}" target="_blank">{{ post.text|truncatewords:7 }}</a></td>
