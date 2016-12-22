@@ -85,8 +85,8 @@ class Command(BaseCommand):
         status_link = '' if 'link' not in status.keys() else status['link']  # noqa
         status_author = status['from']
         status_published = datetime.datetime.strptime(status['created_time'], '%Y-%m-%dT%H:%M:%S+0000')  # noqa
+        status_published = status_published + datetime.timedelta(hours=+5)
         status_published = pytz.utc.localize(status_published)
-        # status_published = status_published + datetime.timedelta(hours=-5)
         status_published = status_published.strftime('%Y-%m-%d %H:%M:%S')  # noqa
         num_reactions = 0 if 'reactions' not in status.keys() else status['reactions']['summary']['total_count']  # noqa
         num_comments = 0 if 'comments' not in status.keys() else status['comments']['summary']['total_count']  # noqa
