@@ -7,6 +7,7 @@ from django.conf import settings
 from django.db import connection
 from django.db.models import Count, Sum, Q
 from django.db.models.functions import TruncYear, TruncMonth, ExtractWeekDay
+from django.views.generic import TemplateView
 
 # Core
 from .models import Post
@@ -25,6 +26,15 @@ from stathat import StatHat
 
 # Hashids
 from hashids import Hashids
+
+
+class LastPostsView(TemplateView):
+    template_name = 'last_posts.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(LastPosts, self).get_context_data(*args, **kwargs)
+        context['last_posts'] = Post.objects.order_by('-published')[:20]
+        return context
 
 
 def stat_yearly(request):
@@ -126,13 +136,6 @@ def index(request):
         'last_post': Post.objects.last()
     }
     return render(request, 'index.html', context)
-
-
-def feed(request):
-    context = {
-        'new_posts': Post.objects.order_by('-published')[:20]
-    }
-    return render(request, 'feed.html', context)
 
 
 def about(request):
