@@ -48,8 +48,16 @@
         </table>
         <nav aria-label="pages">
           <ul class="pager">
+            {% if not results.has_previous %}
+            <li class="previous disabled"><a href="#"><span aria-hidden="true">&larr;</span> Аввалги</a></li>
+            {% else %}
             <li class="previous"><a href="{% url "search" %}?q={{ request.GET.q }}&page={{ results.previous_page_number }}"><span aria-hidden="true">&larr;</span> Аввалги</a></li>
+            {% endif %}
+            {% if not results.has_next %}
+            <li class="next disabled"><a href="#">Кейинги <span aria-hidden="true">&rarr;</span></a></li>
+            {% else %}
             <li class="next"><a href="{% url "search" %}?q={{ request.GET.q }}&page={{ results.next_page_number }}">Кейинги <span aria-hidden="true">&rarr;</span></a></li>
+            {% endif %}
           </ul>
         </nav>
       {% else %}
