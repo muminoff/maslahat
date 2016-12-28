@@ -48,8 +48,8 @@
         </table>
         <nav aria-label="pages">
           <ul class="pager">
-            <li class="previous"><a href="{% url "search" %}?q={{ request.GET.q }}&page={{ results.paginator.previous_page }}"><span aria-hidden="true">&larr;</span> Аввалги</a></li>
-            <li class="next"><a href="{% url "search" %}?q={{ request.GET.q }}&page={{ results.paginator.next_page }}">Кейинги <span aria-hidden="true">&rarr;</span></a></li>
+            <li class="previous"><a href="{% url "search" %}?q={{ request.GET.q }}&page={{ results.paginator.previous_page_number }}"><span aria-hidden="true">&larr;</span> Аввалги</a></li>
+            <li class="next"><a href="{% url "search" %}?q={{ request.GET.q }}&page={{ results.paginator.next_page_number }}">Кейинги <span aria-hidden="true">&rarr;</span></a></li>
           </ul>
         </nav>
       {% else %}
