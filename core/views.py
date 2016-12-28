@@ -20,6 +20,7 @@ import pickle
 from urllib.parse import urlparse
 redis_url = urlparse(os.environ.get('REDIS_URL'))
 import itertools
+import time
 
 # Stathat
 from stathat import StatHat
@@ -150,25 +151,40 @@ def about(request):
     return render(request, 'about.html', context)
 
 
-def search(request):
-    q = request.GET.get('q', None)
-    results = list()
+class SearchView(TemplateView):
+    template_name = 'search.html'
+    paginate_by = getattr(settings, 'DEFAULT_PAGINATE_BY', 10)
 
-    if q:
-        q = q.strip()
-        results = Post.objects.filter(
-            Q(text__icontains=q) |
-            Q(author__icontains=q)).order_by('-published')
+    def get(self, request, *args, **kwargs):
+        self.results = list()
+        self.took = 0
+        q = request.GET.get('q')
 
-    context = { 'results': results, 'q': q }
-    return render(request, 'search.html', context)
+        if q:
+            q = q.strip()
+            start_time = time.time()
+            self.results = Post.objects.filter(
+                Q(text__icontains=q) |
+                Q(author__icontains=q)).order_by('-published')
+            self.took = round(time.time() -  start_time, 4)
+
+        from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+        paginator = Paginator(self.results, self.paginate_by)
+        page = request.GET.get('page', 1)
+
+        self.results = paginator.page(page)
+        return super(SearhView, self).get(request, *args, **kwargs)
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(SearchView, self).get_context_data(*args, **kwargs)
+        context['results'] = self.results
+        context['took'] = self.took
+        return context
 
 
 def author_posts(request, hashid):
     hashids = Hashids(salt=settings.SECRET_KEY)
     author_id = hashids.decode(str(hashid))[0]
-    print('hashid ->', hashid)
-    print('author_id ->', author_id)
     context = {
         'posts': Post.objects.filter(
             author_id=author_id).order_by('-published'),
