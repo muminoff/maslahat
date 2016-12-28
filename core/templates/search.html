@@ -4,7 +4,8 @@
 <div class="container" style="display:flex;justify-content:center;align-items:center;">
   <div>
       {% if results %}
-      <h3>"{{ request.GET.q }}" сўрови бўйича қидирув <small>{{ results.paginator.count }} та натижа ({{ took }} секунд)</small></h3>
+      <h3>"{{ request.GET.q }}" сўрови бўйича қидирув <small>({{ took }} секунд)</small></h3>
+      <small>{{ results.paginator.count }} та натижа</small>
       <hr/>
       <table class="table table-condensed table-hover">
           <thead>
