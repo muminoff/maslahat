@@ -29,7 +29,7 @@
               {% for post in results %}
               <tr>
                   <td>{{ forloop.counter0|add:results.start_index }}.</td>
-                  <td><a href="//fb.com/{{ post.id }}" target="_blank">{{ post.text|truncatewords:7 }}</a></td>
+                  <td><a href="//fb.com/{{ post.id }}" target="_blank">{{ post.text|truncatechars:32 }}</a></td>
                   {% localtime on %}
                   <td>{{ post.published|date:"d-m-Y H:i" }}</td>
                   {% endlocaltime %}
