@@ -8,6 +8,7 @@ from django.db import connection
 from django.db.models import Count, Sum, Q
 from django.db.models.functions import TruncYear, TruncMonth, ExtractWeekDay
 from django.views.generic import TemplateView
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 # Core
 from .models import Post
@@ -168,11 +169,16 @@ class SearchView(TemplateView):
                 Q(author__icontains=q)).order_by('-published')
             self.took = round(time.time() -  start_time, 4)
 
-        from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
         paginator = Paginator(self.results, self.paginate_by)
         page = request.GET.get('page', 1)
 
-        self.results = paginator.page(page)
+        try:
+            self.results = paginator.page(page)
+        except PageNotAnInteger:
+            self.results = paginator.page(1)
+        except EmptyPage:
+            self.results = paginator.page(paginator.num_pages)
+
         return super(SearchView, self).get(request, *args, **kwargs)
 
     def get_context_data(self, *args, **kwargs):
