@@ -5,7 +5,7 @@
   <div>
       {% if results %}
       <h3>"{{ request.GET.q }}" сўрови бўйича қидирув <small>({{ took }} секунд)</small></h3>
-      <small>Жами {{ results.paginator.count }} та натижалар ичидан {{ results.start_index }} дан {{ page.end_index }} гачаси</small>
+      <small>Жами {{ results.paginator.count }} та натижалар ичидан {{ results.start_index }} дан {{ results.end_index }} гачаси</small>
       <hr/>
       <table class="table table-condensed table-hover">
           <thead>
