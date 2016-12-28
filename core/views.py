@@ -173,7 +173,7 @@ class SearchView(TemplateView):
         page = request.GET.get('page', 1)
 
         self.results = paginator.page(page)
-        return super(SearhView, self).get(request, *args, **kwargs)
+        return super(SearchView, self).get(request, *args, **kwargs)
 
     def get_context_data(self, *args, **kwargs):
         context = super(SearchView, self).get_context_data(*args, **kwargs)
