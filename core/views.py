@@ -32,7 +32,7 @@ class LastPostsView(TemplateView):
     template_name = 'last_posts.html'
 
     def get_context_data(self, *args, **kwargs):
-        context = super(LastPosts, self).get_context_data(*args, **kwargs)
+        context = super(LastPostsView, self).get_context_data(*args, **kwargs)
         context['last_posts'] = Post.objects.order_by('-published')[:20]
         return context
 
