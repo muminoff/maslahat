@@ -1,12 +1,9 @@
 {% extends "site.html" %}
-{% load staticfiles socialaccount %}
-
+{% load staticfiles %}
 {% block content %}
 <div class="container" style="display:flex;justify-content:center;align-items:center;">
   <div>
     <img src="//d13yacurqjgara.cloudfront.net/users/607375/screenshots/2740815/maslahatuz_1x.jpg"/>
-    {% providers_media_js %}
-    <a href="{% provider_login_url "facebook" method="js_sdk" %}">Фейсбук орқали кириш</a>
   <br/>
   <br/>
   <div id="stat"></div>
