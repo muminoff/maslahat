@@ -31,7 +31,7 @@ SECRET_KEY = 'i+acxn5(akgsn!sr4^qgf(^m&*@+g1@u^t@=8s@axc41ml*f=s'
 # Application definition
 
 INSTALLED_APPS = (
-    'django.contrib.sites.'
+    'django.contrib.sites'
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
