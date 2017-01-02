@@ -1,12 +1,12 @@
 {% extends "base.html" %}
-{% load staticfiles %}
-{% load cache %}
+{% load staticfiles socialaccount %}
 
 {% block content %}
 <div class="container" style="display:flex;justify-content:center;align-items:center;">
   <div>
     <img src="//d13yacurqjgara.cloudfront.net/users/607375/screenshots/2740815/maslahatuz_1x.jpg"/>
-  <h3>Сайт фаол тарзда янгиланиб бориляпти. Тез кунларда янги кўринишда ишга тушади.</h3>
+    {% providers_media_js %}
+    <a href="{% provider_login_url "facebook" method="js_sdk" %}">Фейсбук орқали кириш</a>
   <br/>
   <br/>
   <div id="stat"></div>
