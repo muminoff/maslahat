@@ -1,9 +1,11 @@
+from django.contrib import admin
 from django.conf.urls import (
     include, url, handler400, handler403, handler404, handler500)
 
 import core.views
 
 urlpatterns = [
+    url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^$', core.views.index, name='index'),
     url(r'^latest/$', core.views.LastPostsView.as_view(), name='latest'),
