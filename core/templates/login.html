@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load socialaccount %}
 {% block content %}
 <a href="{% provider_login_url "facebook" method="oauth2" %}">Фейсбук орқали сайтга кириш</a>
 {% endblock %}
