@@ -131,6 +131,10 @@ def top_liked_posts(request):
     return render(request, 'top_liked_posts.html', context)
 
 
+def login(request):
+    return render(request, 'login.html')
+
+
 def index(request):
     stats = StatHat(settings.STATHAT_ACCOUNT)
     stats.count('user.visited', 1)
