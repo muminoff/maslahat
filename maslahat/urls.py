@@ -4,6 +4,7 @@ from django.conf.urls import (
 import core.views
 
 urlpatterns = [
+    url(r'^accounts/', include('allauth.urls')),
     url(r'^$', core.views.index, name='index'),
     url(r'^latest/$', core.views.LastPostsView.as_view(), name='latest'),
     url(r'^about/$', core.views.about, name='about'),

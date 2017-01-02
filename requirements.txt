@@ -9,3 +9,4 @@ hashids
 requests
 django-htmlmin
 pytz==2016.10
+django-allauth==0.30.0
