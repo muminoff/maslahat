@@ -202,33 +202,6 @@ def dictfetchall(cursor):
         for row in cursor.fetchall()
     ]
 
-def group_activity(request):
-    import psycopg2
-    cursor = connection.cursor()
-    cursor.execute("""
-    select
-      m, y, month,
-      (total_shares::float / lag(total_shares) over (order by month) - 1) * 100 share_degree,
-      (total_reactions::float / lag(total_reactions) over (order by month) - 1) * 100 reaction_degree,
-      (total_comments::float / lag(total_comments) over (order by month) - 1) * 100 comment_degree
-      from (
-        select extract(month from published) as m,
-        extract(year from published) as y,
-        to_char(published, 'mm-yyyy') as month,
-        sum(shares) total_shares,
-        sum(reactions) total_reactions,
-        sum(comments) total_comments
-        from core_post
-        group by m, y, month
-      ) s
-    order by y, m asc;
-    """)
-    group_activity = dictfetchall(cursor)
-    context = {
-        'group_activity': group_activity
-    }
-    return render(request, 'group_activity.html', context)
-
 def group_growth(request):
     import psycopg2
     cursor = connection.cursor()

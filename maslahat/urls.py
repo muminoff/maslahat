@@ -22,8 +22,7 @@ urlpatterns = [
     url(r'^top/commented/posts/$', login_required(core.views.top_commented_posts), name='top_commented_posts'),
     url(r'^top/liked/posts/$', login_required(core.views.top_liked_posts), name='top_liked_posts'),
     url(r'^author/(?P<hashid>.+)/$', login_required(core.views.author_posts), name='author_posts'),
-    url(r'^facts/$', login_required(core.views.group_activity), name='facts'),
-    url(r'^facts/activity/$', login_required(core.views.group_activity), name='group_activity'),
+    url(r'^facts/$', login_required(core.views.group_growth), name='facts'),
     url(r'^facts/growth/$', login_required(core.views.group_growth), name='group_growth'),
 ]
 
