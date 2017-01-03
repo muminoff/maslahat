@@ -167,4 +167,4 @@ FACEBOOK_GROUP_ID = os.getenv("FACEBOOK_GROUP_ID")
 STATHAT_ACCOUNT = 'smuminov@gmail.com'
 
 LOGIN_URL = '/login/'
-LOGIN_REDIRECT_URL = '/latest/'
+LOGIN_REDIRECT_URL = '/'
