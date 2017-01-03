@@ -135,15 +135,6 @@ def login(request):
     return render(request, 'login.html')
 
 
-def index(request):
-    stats = StatHat(settings.STATHAT_ACCOUNT)
-    stats.count('user.visited', 1)
-    context = {
-        'last_post': Post.objects.last()
-    }
-    return render(request, 'index.html', context)
-
-
 def about(request):
     context = {
         'os_info': get_os_info(),

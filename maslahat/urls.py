@@ -9,7 +9,6 @@ urlpatterns = [
     url(r'^maslahat/', admin.site.urls),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^login/$', core.views.login, name='login'),
-    url(r'^$', login_required(core.views.index), name='index'),
     url(r'^latest/$', login_required(core.views.LastPostsView.as_view()), name='latest'),
     url(r'^about/$', login_required(core.views.about), name='about'),
     url(r'^search/$', login_required(core.views.SearchView.as_view()), name='search'),
