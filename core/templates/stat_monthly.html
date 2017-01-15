@@ -66,14 +66,15 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
-{% spaceless %}
 <script type="text/javascript">
 Morris.Bar({
     element: 'monthly_posts',
     data: [
+    {% spaceless %}
     {% for this_month in posts_per_month %}
       {year: '{{ this_month.month|date:"m-Y"|uzbekify_monthyear }}', posts: {{ this_month.posts }} },
     {% endfor %}
+    {% endspaceless %}
     ],
     xkey: 'year',
     ykeys: ['posts'],
@@ -88,9 +89,11 @@ Morris.Bar({
 Morris.Bar({
     element: 'monthly_comments',
     data: [
+    {% spaceless %}
     {% for this_month in posts_per_month %}
       {year: '{{ this_month.month|date:"m-Y"|uzbekify_monthyear }}', comments: {{ this_month.comments }} },
     {% endfor %}
+    {% endspaceless %}
     ],
     xkey: 'year',
     ykeys: ['comments'],
@@ -105,9 +108,11 @@ Morris.Bar({
 Morris.Bar({
     element: 'monthly_shares',
     data: [
+    {% spaceless %}
     {% for this_month in posts_per_month %}
       {year: '{{ this_month.month|date:"m-Y"|uzbekify_monthyear }}', shares: {{ this_month.shares }} },
     {% endfor %}
+    {% endspaceless %}
     ],
     xkey: 'year',
     ykeys: ['shares'],
@@ -122,9 +127,11 @@ Morris.Bar({
 Morris.Bar({
     element: 'monthly_likes',
     data: [
+    {% spaceless %}
     {% for this_month in posts_per_month %}
       {year: '{{ this_month.month|date:"m-Y"|uzbekify_monthyear }}', likes: {{ this_month.likes }} },
     {% endfor %}
+    {% endspaceless %}
     ],
     xkey: 'year',
     ykeys: ['likes'],
@@ -137,5 +144,4 @@ Morris.Bar({
     gridTextSize: 10
   });
 </script>
-{% endspaceless %}
 {% endblock %}
