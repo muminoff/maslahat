@@ -162,7 +162,7 @@ class SearchView(TemplateView):
             self.results = Post.objects.filter(
                 Q(text__icontains=q) |
                 Q(author__icontains=q)).order_by('-published')
-            self.took = round(time.time() -  start_time, 4)
+            self.took = round(time.time() - start_time, 4)
 
         paginator = Paginator(self.results, self.paginate_by)
         page = request.GET.get('page', 1)
@@ -194,6 +194,7 @@ def author_posts(request, hashid):
     }
     return render(request, 'author_posts.html', context)
 
+
 def dictfetchall(cursor):
     "Return all rows from a cursor as a dict"
     columns = [col[0] for col in cursor.description]
@@ -201,6 +202,7 @@ def dictfetchall(cursor):
         dict(zip(columns, row))
         for row in cursor.fetchall()
     ]
+
 
 def group_growth(request):
     import psycopg2
@@ -269,17 +271,21 @@ def not_found(request):
 def server_error(request):
     return render(request, '500.html')
 
+
 def get_os_info():
     import platform
     return platform.platform()
 
+
 def get_python_version():
     return sys.version
+
 
 def get_postgres_version():
     cursor = connection.cursor()
     cursor.execute("SELECT version();")
     return cursor.fetchone()[0]
+
 
 def get_redis_version():
     r = redis.StrictRedis(
@@ -288,6 +294,7 @@ def get_redis_version():
         db=0,
         password=redis_url.password)
     return r.info()['redis_version']
+
 
 def get_last_updated():
     r = redis.StrictRedis(

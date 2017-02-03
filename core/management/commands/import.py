@@ -139,7 +139,7 @@ class Command(BaseCommand):
                 except Exception as e:
                     self.stdout.write(self.style.ERROR(str(e)))
                     text = "Cannot insert post %s: %s" % (
-                            resp_data[0], datetime.datetime.now())
+                        resp_data[0], datetime.datetime.now())
                     self.stdout.write(self.style.ERROR(text))
 
                 num_processed += 1

@@ -16,7 +16,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Post',
             fields=[
-                ('id', models.CharField(max_length=256, primary_key=True, serialize=False)),
+                ('id', models.CharField(max_length=256,
+                                        primary_key=True, serialize=False)),
                 ('text', models.TextField()),
                 ('author', models.TextField()),
                 ('author_id', models.TextField()),
